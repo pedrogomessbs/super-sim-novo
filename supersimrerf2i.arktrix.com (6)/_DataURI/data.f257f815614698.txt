@@ -1,0 +1,1 @@
+chrome-extension://kejbdjndbnbjgmefkgdddjlbokphdefk/cs/ta/content_script_bin.js

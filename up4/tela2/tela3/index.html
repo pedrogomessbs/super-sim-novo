@@ -1,0 +1,915 @@
+<!DOCTYPE html><html lang="pt-BR"><head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Minha Conta Banc&aacute;ria</title>
+    <link rel="stylesheet" href="css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+        }
+
+        body {
+            background-color: #1a1a2e;
+            color: #1a1a2e;
+            -webkit-font-smoothing: antialiased;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+        }
+
+        .container {
+            max-width: 480px;
+            width: 100%;
+            margin: 0 auto;
+            padding: 16px;
+            padding-bottom: 90px;
+            background-color: #f0f2f5;
+            min-height: 100vh;
+            position: relative;
+        }
+
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            padding: 8px 0;
+        }
+
+        .logo {
+            font-size: 20px;
+            font-weight: 700;
+            color: #16a34a;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            letter-spacing: -0.3px;
+        }
+
+        .logo i {
+            font-size: 22px;
+            color: #16a34a;
+        }
+
+        .user-info {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-weight: 500;
+            font-size: 14px;
+            color: #64748b;
+        }
+
+        .user-icon {
+            width: 38px;
+            height: 38px;
+            background: linear-gradient(135deg, #16a34a, #15803d);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 15px;
+            box-shadow: 0 2px 8px rgba(22,163,74,.3);
+        }
+
+        /* Saldo Card */
+        .balance-card {
+            background: linear-gradient(135deg, #16a34a 0%, #0f766e 50%, #1e40af 100%);
+            color: white;
+            border-radius: 20px;
+            padding: 24px;
+            margin-bottom: 16px;
+            box-shadow: 0 8px 32px rgba(22,163,74,.25), 0 2px 8px rgba(0,0,0,.1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .balance-card::before {
+            content: '';
+            position: absolute;
+            top: -80px;
+            right: -40px;
+            width: 200px;
+            height: 200px;
+            background: radial-gradient(circle, rgba(255,255,255,.12) 0%, transparent 70%);
+            border-radius: 50%;
+        }
+
+        .balance-card::after {
+            content: '';
+            position: absolute;
+            bottom: -60px;
+            left: -30px;
+            width: 160px;
+            height: 160px;
+            background: radial-gradient(circle, rgba(255,255,255,.08) 0%, transparent 70%);
+            border-radius: 50%;
+        }
+
+        .balance-label {
+            font-size: 13px;
+            margin-bottom: 4px;
+            opacity: 0.85;
+            font-weight: 500;
+            letter-spacing: .3px;
+            text-transform: uppercase;
+        }
+
+        .balance-amount {
+            font-size: 34px;
+            font-weight: 800;
+            margin: 6px 0 0;
+            letter-spacing: -1px;
+        }
+
+        .balance-details {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 18px;
+            font-size: 12px;
+            opacity: 0.8;
+            padding-top: 14px;
+            border-top: 1px solid rgba(255,255,255,.15);
+        }
+        
+        /* Loan Status */
+        .loan-status {
+            background-color: white;
+            border-radius: 20px;
+            padding: 20px;
+            margin-bottom: 16px;
+            box-shadow: 0 1px 4px rgba(0,0,0,.06);
+            border: 1px solid #f1f5f9;
+        }
+
+        .loan-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 12px;
+        }
+
+        .loan-title {
+            font-size: 16px;
+            font-weight: 700;
+            color: #16a34a;
+        }
+
+        .loan-badge {
+            background-color: #fef3c7;
+            color: #d97706;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: .3px;
+            border: 1px solid #fde68a;
+        }
+
+        .loan-amount {
+            font-size: 26px;
+            font-weight: 800;
+            color: #16a34a;
+            margin: 4px 0;
+            letter-spacing: -0.5px;
+        }
+
+        .loan-pending {
+            color: #ea580c;
+        }
+
+        .progress-container {
+            margin: 14px 0;
+        }
+
+        .progress-text {
+            display: flex;
+            justify-content: space-between;
+            font-size: 12px;
+            margin-bottom: 6px;
+            color: #94a3b8;
+            font-weight: 500;
+        }
+
+        .progress-bar {
+            height: 8px;
+            background-color: #f1f5f9;
+            border-radius: 99px;
+            overflow: hidden;
+        }
+
+        .progress {
+            height: 100%;
+            background: linear-gradient(90deg, #16a34a, #22d3ee);
+            width: 50%;
+            border-radius: 99px;
+            transition: width .6s ease;
+        }
+
+        .activation-message {
+            background-color: #fffbeb;
+            border-left: 4px solid #f59e0b;
+            padding: 12px 14px;
+            border-radius: 0 12px 12px 0;
+            margin: 12px 0 0;
+            font-size: 13px;
+            line-height: 1.5;
+            color: #78350f;
+        }
+
+        /* Quick Actions */
+        .quick-actions {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+
+        .action-item {
+            background-color: white;
+            border-radius: 16px;
+            padding: 16px 8px 12px;
+            text-align: center;
+            box-shadow: 0 1px 4px rgba(0,0,0,.05);
+            cursor: pointer;
+            transition: all 0.2s;
+            border: 1px solid #f1f5f9;
+        }
+
+        .action-item:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(0,0,0,.08);
+            border-color: #e2e8f0;
+        }
+
+        #deposit-btn {
+            animation: pulse 2s infinite;
+            border: 2px solid #16a34a;
+            background: linear-gradient(180deg, #f0fdf4, #fff);
+        }
+
+        @keyframes pulse {
+            0% { box-shadow: 0 0 0 0 rgba(22,163,74,.35); }
+            70% { box-shadow: 0 0 0 10px rgba(22,163,74,0); }
+            100% { box-shadow: 0 0 0 0 rgba(22,163,74,0); }
+        }
+
+        .action-icon {
+            font-size: 24px;
+            margin-bottom: 8px;
+            color: #16a34a;
+        }
+
+        .action-label {
+            font-size: 11px;
+            font-weight: 600;
+            color: #475569;
+            letter-spacing: .2px;
+        }
+
+        /* Recent Transactions */
+        .section-title {
+            font-size: 15px;
+            font-weight: 700;
+            margin: 16px 0 12px;
+            color: #16a34a;
+            letter-spacing: -.2px;
+        }
+
+        .transaction-item {
+            background-color: white;
+            border-radius: 14px;
+            padding: 14px 16px;
+            margin-bottom: 8px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 1px 3px rgba(0,0,0,.04);
+            border: 1px solid #f8fafc;
+        }
+
+        .transaction-details {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .transaction-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 12px;
+            background: linear-gradient(135deg, #f0fdf4, #ecfdf5);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #16a34a;
+            font-size: 15px;
+        }
+
+        .transaction-info {
+            line-height: 1.4;
+        }
+
+        .transaction-description {
+            font-weight: 600;
+            font-size: 13px;
+            color: #1e293b;
+        }
+
+        .transaction-date {
+            font-size: 11px;
+            color: #94a3b8;
+            font-weight: 500;
+        }
+
+        .transaction-amount {
+            font-weight: 700;
+            font-size: 14px;
+            letter-spacing: -.2px;
+        }
+
+        .transaction-amount.positive {
+            color: #16a34a;
+        }
+
+        .transaction-amount.negative {
+            color: #dc2626;
+        }
+
+        /* Bottom Navigation */
+        .bottom-nav {
+            position: fixed;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100%;
+            max-width: 480px;
+            background: rgba(255,255,255,.95);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            display: flex;
+            justify-content: space-around;
+            padding: 10px 0 max(10px, env(safe-area-inset-bottom));
+            box-shadow: 0 -1px 12px rgba(0,0,0,.06);
+            z-index: 100;
+            border-top: 1px solid rgba(0,0,0,.04);
+        }
+
+        .nav-item {
+            text-align: center;
+            color: #94a3b8;
+            font-size: 10px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: color .2s;
+            position: relative;
+        }
+
+        .nav-item.active {
+            color: #16a34a;
+        }
+
+        .nav-item.active::before {
+            content: '';
+            position: absolute;
+            top: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 20px;
+            height: 3px;
+            background: #16a34a;
+            border-radius: 0 0 3px 3px;
+        }
+
+        .nav-icon {
+            font-size: 20px;
+            margin-bottom: 3px;
+        }
+        
+        /* Modal Styles */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: rgba(0, 0, 0, 0.5);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px 16px;
+            overflow-y: auto;
+            -webkit-overflow-scrolling: touch;
+            z-index: 1000;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+        }
+        
+        .modal-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+        
+        .modal {
+            background-color: white;
+            border-radius: 16px;
+            width: 90%;
+            max-width: 400px;
+            max-height: 80vh;
+            overflow-y: auto;
+            padding: 20px;
+            margin: auto;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.15);
+            transform: translateY(20px);
+            transition: transform 0.3s ease;
+            flex-shrink: 0;
+        }
+        
+        .modal-overlay.active .modal {
+            transform: translateY(0);
+        }
+        
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+        
+        .modal-title {
+            font-size: 18px;
+            font-weight: 600;
+            color: #ffbd03;
+        }
+        
+        .modal-close {
+            background: #f1f5f9;
+            border: none;
+            font-size: 18px;
+            cursor: pointer;
+            color: #64748b;
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background .2s;
+            line-height: 1;
+        }
+        .modal-close:hover {
+            background: #e2e8f0;
+            color: #334155;
+        }
+        
+        .modal-content {
+            margin-bottom: 20px;
+            line-height: 1.6;
+            font-size: 14px;
+        }
+        
+        .modal-icon {
+            text-align: center;
+            font-size: 40px;
+            color: #ffbd03;
+            margin: 15px 0;
+        }
+        
+        .modal-button {
+            background: linear-gradient(135deg, #16a34a, #15803d);
+            color: white;
+            border: none;
+            border-radius: 14px;
+            padding: 14px;
+            width: 100%;
+            font-size: 15px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s;
+            box-shadow: 0 4px 14px rgba(22,163,74,.3);
+            letter-spacing: .2px;
+        }
+
+        .modal-button:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 6px 20px rgba(22,163,74,.4);
+        }
+
+        .modal-button:active {
+            transform: translateY(0);
+        }
+
+        /* Activation Modal */
+        .activation-steps {
+            margin: 16px 0;
+        }
+
+        .step {
+            display: flex;
+            margin-bottom: 14px;
+            align-items: flex-start;
+        }
+
+        .step-number {
+            width: 28px;
+            height: 28px;
+            background-color: #f1f5f9;
+            color: #94a3b8;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 12px;
+            margin-right: 12px;
+            flex-shrink: 0;
+        }
+
+        .step.active .step-number {
+            background: linear-gradient(135deg, #16a34a, #15803d);
+            color: white;
+            box-shadow: 0 2px 8px rgba(22,163,74,.3);
+        }
+
+        .step.completed .step-number {
+            background: #16a34a;
+            color: white;
+        }
+
+        .step-content {
+            font-size: 13px;
+            color: #64748b;
+        }
+
+        .step-title {
+            font-weight: 600;
+            margin-bottom: 2px;
+            color: #1e293b;
+        }
+
+        .step.completed .step-title { color: #16a34a; }
+        .step.active .step-title { color: #16a34a; }
+
+        /* Deposit Options */
+        .deposit-options {
+            margin: 16px 0;
+        }
+
+        .deposit-option {
+            border: 1.5px solid #e2e8f0;
+            border-radius: 14px;
+            padding: 16px;
+            margin-bottom: 10px;
+            cursor: pointer;
+            transition: all 0.2s;
+            background: #fff;
+        }
+
+        .deposit-option:hover {
+            border-color: #16a34a;
+            background-color: #f0fdf4;
+        }
+
+        .deposit-option.selected {
+            border-color: #16a34a;
+            background: linear-gradient(135deg, #f0fdf4, #ecfdf5);
+            box-shadow: 0 2px 8px rgba(22,163,74,.12);
+        }
+
+        .option-header {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 4px;
+        }
+
+        .option-title {
+            font-weight: 700;
+            font-size: 14px;
+            color: #1e293b;
+        }
+
+        .option-amount {
+            font-weight: 800;
+            color: #16a34a;
+            font-size: 15px;
+        }
+
+        .option-description {
+            font-size: 12px;
+            color: #94a3b8;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="logo">
+                <i class="fas fa-university"></i>
+                <span>SuperSim</span>
+            </div>
+            <div class="user-info">
+                <div class="user-icon">
+                    <i class="fas fa-user"></i>
+                </div>
+                <span>Olá!</span>
+            </div>
+        </header>
+        
+        <div class="balance-card">
+            <div class="balance-label">Saldo disponível</div>
+            <div class="balance-amount">R$ 28,80</div>
+            <div class="balance-details">
+                <div>
+                    <div>Conta corrente</div>
+                    <div>****-5678</div>
+                </div>
+                <div>
+                    <div>Limite disponível</div>
+                    <div>R$ 10.000,00</div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="loan-status">
+            <div class="loan-header">
+                <div class="loan-title">Seu Empréstimo</div>
+                <div class="loan-badge">Pendente</div>
+            </div>
+            
+            <div class="loan-amount loan-pending">R$ 7.500,00</div>
+            <div style="font-size: 13px; color: #666; margin-bottom: 10px;">Valor Aprovado</div>
+            
+            <div class="progress-container">
+                <div class="progress-text">
+                    <span>Ativação da conta</span>
+                    <span>50% completo</span>
+                </div>
+                <div class="progress-bar">
+                    <div class="progress"></div>
+                </div>
+            </div>
+            
+            <div class="activation-message">
+                Para que possamos liberar o seu empréstimo com segurança, é necessário concluir a ativação da sua conta. Para isso, realize um depósito de <strong>R$ 50,00</strong> e atinja o saldo mínimo obrigatório de R$ 70,00, que serve para validar sua primeira movimentação na conta.
+            </div>
+        </div>
+        
+        <div class="quick-actions">
+            <div class="action-item" id="transfer-btn">
+                <div class="action-icon">
+                    <i class="fas fa-exchange-alt"></i>
+                </div>
+                <div class="action-label">Transferir</div>
+            </div>
+            <div class="action-item" id="deposit-btn">
+                <div class="action-icon">
+                    <i class="fas fa-money-bill-wave"></i>
+                </div>
+                <div class="action-label">Depositar</div>
+            </div>
+            <div class="action-item">
+                <div class="action-icon">
+                    <i class="fas fa-barcode"></i>
+                </div>
+                <div class="action-label">Pagar</div>
+            </div>
+            <div class="action-item">
+                <div class="action-icon">
+                    <i class="fas fa-qrcode"></i>
+                </div>
+                <div class="action-label">Pix</div>
+            </div>
+        </div>
+        
+        <h3 class="section-title">Últimas transações</h3>
+        
+        <div class="transaction-item">
+            <div class="transaction-details">
+                <div class="transaction-icon">
+                    <i class="fas fa-lock"></i>
+                </div>
+                <div class="transaction-info">
+                    <div class="transaction-description">Seguro Prestamista</div>
+                    <div class="transaction-date">Hoje - 10:30</div>
+                </div>
+            </div>
+            <div class="transaction-amount negative">- R$ 40,80</div>
+        </div>
+        
+        <div class="transaction-item">
+            <div class="transaction-details">
+                <div class="transaction-icon">
+                    <i class="fas fa-arrow-down"></i>
+                </div>
+                <div class="transaction-info">
+                    <div class="transaction-description">Transferência recebida</div>
+                    <div class="transaction-date">Ontem - 14:15</div>
+                </div>
+            </div>
+            <div class="transaction-amount positive">+ R$ 40,80</div>
+        </div>
+    </div>
+    
+    <div class="bottom-nav">
+        <div class="nav-item active">
+            <div class="nav-icon"><i class="fas fa-home"></i></div>
+            <div>Início</div>
+        </div>
+        <div class="nav-item">
+            <div class="nav-icon"><i class="fas fa-credit-card"></i></div>
+            <div>Cartões</div>
+        </div>
+        <div class="nav-item">
+            <div class="nav-icon"><i class="fas fa-chart-line"></i></div>
+            <div>Investir</div>
+        </div>
+        <div class="nav-item">
+            <div class="nav-icon"><i class="fas fa-bell"></i></div>
+            <div>Notificações</div>
+        </div>
+        <div class="nav-item">
+            <div class="nav-icon"><i class="fas fa-bars"></i></div>
+            <div>Mais</div>
+        </div>
+    </div>
+    
+    <!-- Activation Modal -->
+    <div class="modal-overlay" id="activation-modal">
+        <div class="modal">
+            <div class="modal-header">
+                <div class="modal-title">Ativar Conta</div>
+                <button class="modal-close" id="close-modal">&times;</button>
+            </div>
+            
+            <div class="modal-content">
+                <p>Para liberar seu empréstimo de <strong>R$ 7.500,00</strong>, complete a ativação da sua conta:</p>
+                
+                <div class="activation-steps">
+                    <div class="step completed">
+                        <div class="step-number">1</div>
+                        <div class="step-content">
+                            <div class="step-title">Pagamento do Seguro</div>
+                            <div>R$ 28,80 pago</div>
+                        </div>
+                    </div>
+                    
+                    <div class="step active">
+                        <div class="step-number">2</div>
+                        <div class="step-content">
+                            <div class="step-title">Depósito Mínimo</div>
+                            <div>Deposite R$ 50,00 para completar R$ 70,00</div>
+                        </div>
+                    </div>
+                    
+                    <div class="step">
+                        <div class="step-number">3</div>
+                        <div class="step-content">
+                            <div class="step-title">Liberação do Empréstimo</div>
+                            <div>Receba R$ 7.500,00 em sua conta</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="deposit-options">
+                    <div class="deposit-option selected" id="full-deposit">
+                        <div class="option-header">
+                            <div class="option-title">Depósito Completo</div>
+                            <div class="option-amount">R$ 50,00</div>
+                        </div>
+                        <div class="option-description">Ative sua conta imediatamente</div>
+                    </div>
+                    
+                    <p style="font-size: 12px; color: #666; margin-top: 10px;">
+                        O valor depositado ficará disponível em sua conta corrente.
+                    </p>
+                </div>
+                
+                <button class="modal-button" id="confirm-deposit">
+                    Confirmar Depósito
+                </button>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Success Modal -->
+    <div class="modal-overlay" id="success-modal">
+        <div class="modal">
+            <div class="modal-header">
+                <div class="modal-title">Ativação Completa</div>
+                <button class="modal-close" id="close-success">&times;</button>
+            </div>
+            
+            <div class="modal-icon">
+                <i class="fas fa-check-circle"></i>
+            </div>
+            
+            <div class="modal-content" style="text-align: center;">
+                <p style="font-weight: 600; margin-bottom: 15px;">Ordem de pagamento Criada!</p>
+                <p>Seu novo saldo: <strong>R$ 100,00</strong></p>
+                <p style="margin-top: 10px;">O empréstimo de <strong>R$ 7.500,00</strong> será creditado em até 24 horas.</p>
+            </div>
+            
+            <button class="modal-button" id="view-account">
+                Acessar Minha Conta
+            </button>
+        </div>
+    </div>
+    
+    <script>
+// Função para repassar params da URL
+function repassarParams(path) {
+  return path + window.location.search;
+}
+
+// Modal functionality
+const depositBtn = document.getElementById('deposit-btn');
+const activationModal = document.getElementById('activation-modal');
+const closeModal = document.getElementById('close-modal');
+const successModal = document.getElementById('success-modal');
+const closeSuccess = document.getElementById('close-success');
+const confirmDeposit = document.getElementById('confirm-deposit');
+const viewAccount = document.getElementById('view-account');
+
+// Deposit options
+const fullDeposit = document.getElementById('full-deposit');
+
+depositBtn.addEventListener('click', () => {
+  activationModal.classList.add('active');
+});
+
+closeModal.addEventListener('click', () => {
+  activationModal.classList.remove('active');
+});
+
+closeSuccess.addEventListener('click', () => {
+  successModal.classList.remove('active');
+});
+
+// Select deposit option
+fullDeposit.addEventListener('click', () => {
+  fullDeposit.classList.add('selected');
+});
+
+// Confirm deposit - redireciona para google.com.br
+confirmDeposit.addEventListener('click', () => {
+  activationModal.classList.remove('active');
+
+  // Simulate processing
+  setTimeout(() => {
+    //successModal.classList.add('active');
+
+    // Update UI (simulation)
+    //document.querySelector('.balance-amount').textContent = 'R$ 100,00';
+    //document.querySelector('.progress').style.width = '100%';
+    //document.querySelector('.progress-text span:last-child').textContent = '100% completo';
+    //document.querySelector('.loan-badge').textContent = 'Ativado';
+
+    // Abre popup Pix em vez de redirecionar para checkout externo
+    setTimeout(() => {
+      if (window.SuperSimPix) {
+        window.SuperSimPix.open(50.00, 'Pagamento Upsell 4');
+      }
+    }, 1000);
+  }, 1000);
+});
+
+viewAccount.addEventListener('click', () => {
+  successModal.classList.remove('active');
+});
+
+// Close modals when clicking outside
+window.addEventListener('click', (e) => {
+  if (e.target === activationModal) {
+    activationModal.classList.remove('active');
+  }
+  if (e.target === successModal) {
+    successModal.classList.remove('active');
+  }
+});
+
+    </script>
+<script>
+  window.tikTokPixelId = "69dc17c453020b689ba08332";
+  var a = document.createElement("script");
+  a.setAttribute("async", "");
+  a.setAttribute("defer", "");
+  a.setAttribute("src", "https://cdn.utmify.com.br/scripts/pixel/pixel-tiktok.js");
+  document.head.appendChild(a);
+</script>
+<script
+  src="https://cdn.utmify.com.br/scripts/utms/latest.js"
+  data-utmify-prevent-xcod-sck
+  data-utmify-prevent-subids
+  async
+  defer
+></script>
+
+
+<script src="/js/pix-popup.js" defer></script>
+</body></html>

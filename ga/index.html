@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Redirecionamento</title>
+<!-- TikTok Pixel Code Start -->
+<script>
+!function (w, d, t) {
+  w.TiktokAnalyticsObject=t;var ttq=w[t]=w[t]||[];ttq.methods=["page","track","identify","instances","debug","on","off","once","ready","alias","group","enableCookie","disableCookie","holdConsent","revokeConsent","grantConsent"],ttq.setAndDefer=function(t,e){t[e]=function(){t.push([e].concat(Array.prototype.slice.call(arguments,0)))}};for(var i=0;i<ttq.methods.length;i++)ttq.setAndDefer(ttq,ttq.methods[i]);ttq.instance=function(t){for(
+var e=ttq._i[t]||[],n=0;n<ttq.methods.length;n++)ttq.setAndDefer(e,ttq.methods[n]);return e},ttq.load=function(e,n){var r="https://analytics.tiktok.com/i18n/pixel/events.js",o=n&&n.partner;ttq._i=ttq._i||{},ttq._i[e]=[],ttq._i[e]._u=r,ttq._t=ttq._t||{},ttq._t[e]=+new Date,ttq._o=ttq._o||{},ttq._o[e]=n||{};n=document.createElement("script")
+;n.type="text/javascript",n.async=!0,n.src=r+"?sdkid="+e+"&lib="+t;e=document.getElementsByTagName("script")[0];e.parentNode.insertBefore(n,e)};
+  ttq.load('D7E1D63C77UFN826502G');
+  ttq.page();
+}(window, document, 'ttq');
+</script>
+<!-- TikTok Pixel Code End -->
+</head>
+<body>
+
+<script>
+  window.tikTokPixelId = "69dc17c453020b689ba08332";
+  var a = document.createElement("script");
+  a.setAttribute("async", "");
+  a.setAttribute("defer", "");
+  a.setAttribute("src", "https://cdn.utmify.com.br/scripts/pixel/pixel-tiktok.js");
+  document.head.appendChild(a);
+</script>
+<script
+  src="https://cdn.utmify.com.br/scripts/utms/latest.js"
+  data-utmify-prevent-xcod-sck
+  data-utmify-prevent-subids
+  async
+  defer
+></script>
+
+<script>// Função para obter o número de vezes que o usuário visitou a página
+
+function getVisitCount() {
+
+  // Obtém o valor armazenado no local storage ou retorna 0 se não existir
+
+  return parseInt(localStorage.getItem('visitCount')) || 0;
+
+}
+
+// Função para obter parâmetros UTM da URL atual
+
+function getUTMParameters() {
+
+  const urlParams = new URLSearchParams(window.location.search);
+
+  const utmParams = [];
+
+  
+
+  // Lista de parâmetros UTM comuns
+
+  const utmKeys = ['utm_source', 'utm_medium', 'utm_campaign', 'utm_term', 'utm_content'];
+
+  
+
+  // Verifica cada parâmetro UTM
+
+  utmKeys.forEach(key => {
+
+    if (urlParams.has(key)) {
+
+      utmParams.push(`${key}=${encodeURIComponent(urlParams.get(key))}`);
+
+    }
+
+  });
+
+  
+
+  // Verifica se há outros parâmetros que começam com 'utm_'
+
+  for (const [key, value] of urlParams.entries()) {
+
+    if (key.startsWith('utm_') && !utmKeys.includes(key)) {
+
+      utmParams.push(`${key}=${encodeURIComponent(value)}`);
+
+    }
+
+  }
+
+  
+
+  // Retorna string de parâmetros UTM ou string vazia
+
+  return utmParams.length > 0 ? '?' + utmParams.join('&') : '';
+
+}
+
+// Função para redirecionar com base no número de visitas
+
+function redirectToPage() {
+
+  var visitCount = getVisitCount();
+
+  // Determina a página de redirecionamento com base no número de visitas
+
+  var nextPage;
+
+  switch (visitCount) {
+
+    case 0: nextPage = '../up1/index.html'; break;
+
+    case 1: nextPage = '../up2/index.html'; break;
+
+    case 2: nextPage = '../up3/index.html'; break;
+
+    case 3: nextPage = '../up4/index.html'; break;
+
+    case 4: nextPage = '../up5/index.html'; break;
+    
+    case 5: nextPage = '../up6/index.html'; break;
+
+    case 6: nextPage = '../up7/index.html'; break;
+
+    case 7: nextPage = '../up8/index.html'; break;
+
+    case 8: nextPage = '../up9/index.html'; break;
+
+    case 9: nextPage = '../up10/index.html'; break;
+
+    case 10: nextPage = '../up11/index.html'; break;
+          
+    case 11: nextPage = '../up12/index.html'; break;
+          
+
+  }
+
+  
+
+  // Incrementa o número de visitas
+
+  localStorage.setItem('visitCount', visitCount + 1);
+
+  
+
+  // Obtém os parâmetros UTM
+
+  const utmParams = getUTMParameters();
+
+  
+
+  // Redireciona para a próxima página com os parâmetros UTM
+
+  window.location.href = nextPage + utmParams;
+
+}
+
+// Chama a função de redirecionamento quando a página é carregada
+
+redirectToPage();</script>
+
+<script src="/api/tracker.js" defer></script></body>
+</html>

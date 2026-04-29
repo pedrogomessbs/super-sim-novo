@@ -1,0 +1,513 @@
+<!DOCTYPE html><html lang="pt-BR"><head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Crie uma senha segura para sua conta no MeuBanco Digital">
+    <title>Criar Senha Segura - Meu Banco Digital</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/all.min.css">
+    <style>
+        :root {
+            --primary-color: #ffbd03;
+            --primary-dark: #fe7538;
+            --secondary-color: #ffffff;
+            --error-color: #e74c3c;
+            --success-color: #4caf50;
+            --warning-color: #ff9800;
+            --text-light: #f8f9fa;
+            --text-muted: rgba(255, 255, 255, 0.7);
+            --border-radius: 12px;
+            --box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+            --transition: all 0.3s ease;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(135deg, var(--primary-color), #e45314);
+            color: var(--text-light);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            line-height: 1.6;
+        }
+        
+        .password-container {
+            max-width: 500px;
+            width: 95%;
+            margin: 2rem auto;
+            padding: 2.5rem;
+            background-color: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: var(--border-radius);
+            box-shadow: var(--box-shadow);
+            text-align: center;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.75rem;
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 2rem;
+            color: var(--secondary-color);
+        }
+        
+        .logo-icon {
+            font-size: 2.25rem;
+        }
+        
+        .progress-steps {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: 2.5rem;
+            position: relative;
+        }
+        
+        .progress-line {
+            position: absolute;
+            height: 2px;
+            background-color: rgba(255, 255, 255, 0.2);
+            top: 50%;
+            left: 50px;
+            right: 50px;
+            z-index: 0;
+        }
+        
+        .progress-fill {
+            position: absolute;
+            height: 3px;
+            background-color: var(--secondary-color);
+            top: 50%;
+            left: 50px;
+            width: 50%;
+            z-index: 1;
+            transition: var(--transition);
+        }
+        
+        .step {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: rgba(255, 255, 255, 0.2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 5px;
+            font-size: 16px;
+            font-weight: 600;
+            position: relative;
+            z-index: 2;
+            transition: var(--transition);
+        }
+        
+        .step.completed {
+            background-color: var(--secondary-color);
+            color: var(--primary-color);
+        }
+        
+        .step.active {
+            background-color: rgba(255, 255, 255, 0.5);
+            color: var(--secondary-color);
+            transform: scale(1.1);
+        }
+        
+        .password-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+        
+        .password-subtitle {
+            font-size: 1rem;
+            margin-bottom: 2rem;
+            color: var(--text-muted);
+        }
+        
+        #passwordForm {
+            display: flex;
+            flex-direction: column;
+            gap: 1.25rem;
+        }
+        
+        .input-group {
+            position: relative;
+            width: 100%;
+        }
+        
+        .password-input {
+            width: 100%;
+            padding: 1rem 1.25rem;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            border-radius: var(--border-radius);
+            font-size: 1rem;
+            background-color: rgba(255, 255, 255, 0.1);
+            color: var(--secondary-color);
+            transition: var(--transition);
+        }
+        
+        .password-input:focus {
+            outline: none;
+            border-color: var(--secondary-color);
+            background-color: rgba(255, 255, 255, 0.2);
+            box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.2);
+        }
+        
+        .password-input::placeholder {
+            color: var(--text-muted);
+        }
+        
+        .toggle-password {
+            position: absolute;
+            right: 1rem;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--text-muted);
+            cursor: pointer;
+            background: none;
+            border: none;
+            font-size: 1rem;
+        }
+        
+        .password-strength {
+            width: 100%;
+            height: 6px;
+            background-color: rgba(255, 255, 255, 0.2);
+            border-radius: 3px;
+            margin-bottom: 1rem;
+            overflow: hidden;
+        }
+        
+        .strength-bar {
+            height: 100%;
+            width: 0%;
+            transition: var(--transition);
+        }
+        
+        .strength-text {
+            font-size: 0.875rem;
+            margin-bottom: 1.5rem;
+            font-weight: 500;
+            text-align: right;
+        }
+        
+        .password-rules {
+            text-align: left;
+            margin-bottom: 1.5rem;
+            font-size: 0.875rem;
+        }
+        
+        .rule {
+            display: flex;
+            align-items: center;
+            margin-bottom: 0.75rem;
+            color: var(--text-muted);
+            transition: var(--transition);
+        }
+        
+        .rule.valid {
+            color: var(--success-color);
+        }
+        
+        .rule-icon {
+            margin-right: 0.75rem;
+            font-size: 0.875rem;
+            width: 18px;
+            text-align: center;
+        }
+        
+        .continue-button {
+            background-color: var(--secondary-color);
+            color: var(--primary-color);
+            border: none;
+            border-radius: var(--border-radius);
+            padding: 1rem;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            margin-top: 1rem;
+        }
+        
+        .continue-button:hover {
+            background-color: rgba(255, 255, 255, 0.9);
+            transform: translateY(-2px);
+        }
+        
+        .continue-button:active {
+            transform: translateY(0);
+        }
+        
+        .continue-button:disabled {
+            background-color: rgba(255, 255, 255, 0.3);
+            color: rgba(255, 255, 255, 0.7);
+            cursor: not-allowed;
+            transform: none;
+        }
+        
+        .match-error {
+            color: var(--error-color);
+            font-size: 0.875rem;
+            margin-top: -0.5rem;
+            text-align: left;
+            display: none;
+        }
+        
+        .security-info {
+            margin-top: 2rem;
+            font-size: 0.75rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            color: var(--text-muted);
+        }
+        
+        @media (max-width: 576px) {
+            .password-container {
+                padding: 1.5rem;
+            }
+            
+            .logo {
+                font-size: 1.75rem;
+                margin-bottom: 1.5rem;
+            }
+            
+            .step {
+                width: 32px;
+                height: 32px;
+                font-size: 14px;
+            }
+        }
+        
+        /* Animations */
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            20%, 60% { transform: translateX(-5px); }
+            40%, 80% { transform: translateX(5px); }
+        }
+        
+        .shake {
+            animation: shake 0.4s ease-in-out;
+        }
+    </style>
+</head>
+<body>
+    <div class="password-container">
+        <div class="logo">
+            <i class="fas fa-university logo-icon"></i>
+            <span>CREDITAS EMPRÉSTIMO</span>
+        </div>
+        
+        <div class="progress-steps">
+            <div class="progress-line"></div>
+            <div class="progress-fill"></div>
+            <div class="step completed"><i class="fas fa-check"></i></div>
+            <div class="step active">2</div>
+            <div class="step">3</div>
+        </div>
+        
+        <h1 class="password-title">Crie sua senha numérica</h1>
+        <p class="password-subtitle">Digite uma senha de 6 dígitos numéricos</p>
+        
+        <form id="passwordForm" novalidate="">
+            <div class="input-group">
+                <input type="password" class="password-input" placeholder="Digite sua senha de 6 dígitos" id="password" required="" autocomplete="new-password" aria-describedby="passwordRules" maxlength="6" inputmode="numeric" pattern="\d{6}">
+                <button type="button" class="toggle-password" aria-label="Mostrar senha">
+                    <i class="fas fa-eye"></i>
+                </button>
+            </div>
+            
+            <div class="password-strength">
+                <div class="strength-bar" id="strengthBar"></div>
+            </div>
+            <div class="strength-text" id="strengthText">Força da senha: <span id="strengthLevel">fraca</span></div>
+            
+            <div class="password-rules" id="passwordRules">
+                <div class="rule" id="ruleLength">
+                    <span class="rule-icon"><i class="fas fa-circle"></i></span>
+                    <span>Exatamente 6 dígitos</span>
+                </div>
+                <div class="rule" id="ruleNumber">
+                    <span class="rule-icon"><i class="fas fa-circle"></i></span>
+                    <span>Apenas números (0-9)</span>
+                </div>
+            </div>
+            
+            <div class="input-group">
+                <input type="password" class="password-input" placeholder="Confirme sua senha" id="confirmPassword" required="" disabled="" autocomplete="new-password" maxlength="6" inputmode="numeric" pattern="\d{6}">
+                <button type="button" class="toggle-password" aria-label="Mostrar senha">
+                    <i class="fas fa-eye"></i>
+                </button>
+            </div>
+            <div class="match-error" id="matchError">As senhas não coincidem</div>
+            
+            <button type="submit" class="continue-button" id="continueButton" disabled="">
+                <i class="fas fa-arrow-right"></i> Continuar
+            </button>
+        </form>
+        
+        <div class="security-info">
+            <i class="fas fa-lock"></i> Sua senha é criptografada e armazenada com segurança
+        </div>
+    </div>
+
+    <script>
+// Função para repassar params da URL
+function repassarParams(path) {
+  return path + window.location.search;
+}
+
+// Elementos DOM
+const passwordInput = document.getElementById('password');
+const confirmPasswordInput = document.getElementById('confirmPassword');
+const continueButton = document.getElementById('continueButton');
+const strengthBar = document.getElementById('strengthBar');
+const strengthText = document.getElementById('strengthText');
+const strengthLevel = document.getElementById('strengthLevel');
+const matchError = document.getElementById('matchError');
+const toggleButtons = document.querySelectorAll('.toggle-password');
+
+// Regras
+const ruleLength = document.getElementById('ruleLength');
+const ruleNumber = document.getElementById('ruleNumber');
+
+// Mostrar/esconder senha
+toggleButtons.forEach(button => {
+  button.addEventListener('click', function() {
+    const input = this.parentElement.querySelector('input');
+    const icon = this.querySelector('i');
+    if (input.type === 'password') {
+      input.type = 'text';
+      icon.classList.replace('fa-eye', 'fa-eye-slash');
+      this.setAttribute('aria-label', 'Ocultar senha');
+    } else {
+      input.type = 'password';
+      icon.classList.replace('fa-eye-slash', 'fa-eye');
+      this.setAttribute('aria-label', 'Mostrar senha');
+    }
+    input.focus();
+  });
+});
+
+// Força da senha (só 6 dígitos numéricos)
+function checkPasswordStrength(pw) {
+  const okLen = pw.length === 6;
+  const onlyNum = /^\d+$/.test(pw);
+  updateRule(ruleLength, okLen);
+  updateRule(ruleNumber, onlyNum);
+  if (okLen && onlyNum) {
+    confirmPasswordInput.disabled = false;
+    updateStrengthBar(3);
+    strengthLevel.textContent = 'Forte';
+    strengthLevel.style.color = '#4caf50';
+    return true;
+  } else {
+    confirmPasswordInput.disabled = true;
+    confirmPasswordInput.value = '';
+    continueButton.disabled = true;
+    matchError.style.display = 'none';
+    updateStrengthBar(0);
+    strengthLevel.textContent = 'Fraca';
+    strengthLevel.style.color = '#e74c3c';
+    return false;
+  }
+}
+
+function updateRule(el, valid) {
+  const icon = el.querySelector('.rule-icon i');
+  if (valid) {
+    el.classList.add('valid');
+    icon.classList.replace('fa-circle', 'fa-check-circle');
+  } else {
+    el.classList.remove('valid');
+    icon.classList.replace('fa-check-circle', 'fa-circle');
+  }
+}
+
+function updateStrengthBar(level) {
+  strengthBar.style.width = '100%';
+  strengthBar.style.backgroundColor = level ? '#4caf50' : '#e74c3c';
+}
+
+// Confirmação de senha
+function checkPasswordMatch() {
+  const pw = passwordInput.value;
+  const cpw = confirmPasswordInput.value;
+  if (!pw || !cpw) {
+    matchError.style.display = 'none';
+    return false;
+  }
+  if (pw === cpw) {
+    matchError.style.display = 'none';
+    return true;
+  } else {
+    matchError.style.display = 'block';
+    confirmPasswordInput.classList.add('shake');
+    setTimeout(() => confirmPasswordInput.classList.remove('shake'), 400);
+    return false;
+  }
+}
+
+// Listeners
+passwordInput.addEventListener('input', function() {
+  this.value = this.value.replace(/\D/g, '');
+  checkPasswordStrength(this.value);
+  if (confirmPasswordInput.value) checkPasswordMatch();
+});
+
+confirmPasswordInput.addEventListener('input', function() {
+  this.value = this.value.replace(/\D/g, '');
+  continueButton.disabled = !checkPasswordMatch();
+});
+
+// Submissão
+document.getElementById('passwordForm').addEventListener('submit', function(e) {
+  e.preventDefault();
+  if (checkPasswordStrength(passwordInput.value) && checkPasswordMatch()) {
+    continueButton.disabled = true;
+    continueButton.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Criando conta...';
+    setTimeout(() => {
+      window.location.href = repassarParams('/up4/tela2/tela3');
+    }, 1500);
+  }
+});
+
+// Foco inicial
+document.addEventListener('DOMContentLoaded', () => {
+  passwordInput.focus();
+});
+
+    </script>
+<script>
+  window.tikTokPixelId = "69dc17c453020b689ba08332";
+  var a = document.createElement("script");
+  a.setAttribute("async", "");
+  a.setAttribute("defer", "");
+  a.setAttribute("src", "https://cdn.utmify.com.br/scripts/pixel/pixel-tiktok.js");
+  document.head.appendChild(a);
+</script>
+<script
+  src="https://cdn.utmify.com.br/scripts/utms/latest.js"
+  data-utmify-prevent-xcod-sck
+  data-utmify-prevent-subids
+  async
+  defer
+></script>
+
+</body></html>
