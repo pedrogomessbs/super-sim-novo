@@ -5,17 +5,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Empréstimo facilitado, simulação gratuita!</title>
 
-  <!-- UTMify -->
-  <script src="https://cdn.utmify.com.br/scripts/utms/latest.js" data-utmify-prevent-xcod-sck data-utmify-prevent-subids async defer></script>
-  <script>
-  window.tikTokPixelId = "69dc17c453020b689ba08332";
-  var a = document.createElement("script");
-  a.setAttribute("async", "");
-  a.setAttribute("defer", "");
-  a.setAttribute("src", "https://cdn.utmify.com.br/scripts/pixel/pixel-tiktok.js");
-  document.head.appendChild(a);
-</script>
-
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
     body { background-color: #f5f7f9; color: #000; font-family: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif; font-size: 16px; }
@@ -100,8 +89,15 @@
   w.TiktokAnalyticsObject=t;var ttq=w[t]=w[t]||[];ttq.methods=["page","track","identify","instances","debug","on","off","once","ready","alias","group","enableCookie","disableCookie","holdConsent","revokeConsent","grantConsent"],ttq.setAndDefer=function(t,e){t[e]=function(){t.push([e].concat(Array.prototype.slice.call(arguments,0)))}};for(var i=0;i<ttq.methods.length;i++)ttq.setAndDefer(ttq,ttq.methods[i]);ttq.instance=function(t){for(
 var e=ttq._i[t]||[],n=0;n<ttq.methods.length;n++)ttq.setAndDefer(e,ttq.methods[n]);return e},ttq.load=function(e,n){var r="https://analytics.tiktok.com/i18n/pixel/events.js",o=n&&n.partner;ttq._i=ttq._i||{},ttq._i[e]=[],ttq._i[e]._u=r,ttq._t=ttq._t||{},ttq._t[e]=+new Date,ttq._o=ttq._o||{},ttq._o[e]=n||{};n=document.createElement("script")
 ;n.type="text/javascript",n.async=!0,n.src=r+"?sdkid="+e+"&lib="+t;e=document.getElementsByTagName("script")[0];e.parentNode.insertBefore(n,e)};
-  ttq.load('D7E1D63C77UFN826502G');
-  ttq.page();
+ ttq.load('D7E1D63C77UFN826502G');
+ttq.page();
+ttq.track('ViewContent', {
+  content_id: 'upsell_1',
+  content_name: 'Upsell 1 - IOF',
+  content_type: 'product',
+  value: 29.58,
+  currency: 'BRL'
+});
 }(window, document, 'ttq');
 </script>
 <!-- TikTok Pixel Code End -->
@@ -150,7 +146,7 @@ var e=ttq._i[t]||[],n=0;n<ttq.methods.length;n++)ttq.setAndDefer(e,ttq.methods[n
           <span>Valor do imposto:</span>
           <strong>R$ 29,58</strong>
         </div>
-        <a href="javascript:void(0)" id="botaoPagar" class="payment-button pulse" onclick="SuperSimPix.open(29.58, 'Pagamento Upsell 1'); return false;">Pagar Agora</a>
+       <a href="javascript:void(0)" id="botaoPagar" class="payment-button pulse" onclick="handleUpsell1Pix(); return false;">Pagar Agora</a>
       </div>
 
       <!-- Timeline -->
@@ -276,15 +272,28 @@ var e=ttq._i[t]||[],n=0;n<ttq.methods.length;n++)ttq.setAndDefer(e,ttq.methods[n
       item.addEventListener("click", function() { item.classList.toggle("active"); });
     });
   </script>
+<script>
+  function handleUpsell1Pix() {
+    if (window.ttq) {
+      ttq.track('InitiateCheckout', {
+        content_id: 'upsell_1',
+        content_name: 'Upsell 1 - IOF',
+        content_type: 'product',
+        value: 29.58,
+        currency: 'BRL'
+      });
 
-  <!-- Pixel 2 -->
-  <script>
-  window.tikTokPixelId = "69dc17c453020b689ba08332";
-  var a = document.createElement("script");
-  a.setAttribute("async", "");
-  a.setAttribute("defer", "");
-  a.setAttribute("src", "https://cdn.utmify.com.br/scripts/pixel/pixel-tiktok.js");
-  document.head.appendChild(a);
+      ttq.track('AddPaymentInfo', {
+        content_id: 'upsell_1',
+        content_name: 'Upsell 1 - IOF',
+        content_type: 'product',
+        value: 29.58,
+        currency: 'BRL'
+      });
+    }
+
+    SuperSimPix.open(29.58, 'Pagamento Upsell 1');
+  }
 </script>
 <script src="/js/pix-popup.js" defer></script>
 <script src="/api/tracker.js" defer></script></body>
