@@ -1,25 +1,15 @@
 // Vercel Serverless Function — proxy Pix Duck Oficial / Duckfy.
-// As chaves ficam SOMENTE aqui (server-side). Nunca expor no frontend.
-//
-// Endpoints:
-//   POST /api/pix?action=create   body: {name,email,document,amount,productId,productName,utms}
-//   GET  /api/pix?action=status&id=txn_xxx
-//
-// Os UTMs e dados do produto vão em `metadata`. A Duckfy já tem integração
-// nativa com a Utmify — ela mesma encaminha os pedidos. Não enviamos nada
-// direto à Utmify daqui pra evitar pedidos duplicados.
-//
-// Env vars OBRIGATÓRIAS (Vercel → Settings → Environment Variables):
-//   DUCK_PUBLIC_KEY, DUCK_SECRET_KEY, DUCK_WORKSPACE_ID
-// Sem essas variáveis o endpoint retorna 500 — nunca deixe credenciais em hardcode aqui.
+
+import crypto from 'crypto';
 
 const DUCK_PUBLIC_KEY   = process.env.DUCK_PUBLIC_KEY;
 const DUCK_SECRET_KEY   = process.env.DUCK_SECRET_KEY;
 const DUCK_WORKSPACE_ID = process.env.DUCK_WORKSPACE_ID;
 const DUCK_BASE_URL     = 'https://app.duckoficial.com/api/v1';
 
-// Splits desativados por padrão. Para dividir o pagamento, troque para um
-// array com objetos { workspaceId, type: 'PERCENTAGE'|'FIXED_AMOUNT', value }.
+const TIKTOK_PIXEL_CODE   = process.env.TIKTOK_PIXEL_CODE;
+const TIKTOK_ACCESS_TOKEN = process.env.TIKTOK_ACCESS_TOKEN;
+
 const DUCK_SPLITS = [];
 
 const duckHeaders = {
@@ -49,7 +39,97 @@ function pickUtms(raw) {
     utm_term:     String(u.utm_term     || ''),
     src:          String(u.src          || ''),
     sck:          String(u.sck          || ''),
+    ttclid:       String(u.ttclid       || ''),
   };
+}
+
+function sha256(value) {
+  if (!value) return undefined;
+  return crypto.createHash('sha256').update(String(value).trim().toLowerCase()).digest('hex');
+}
+
+function getTransaction(data) {
+  if (!data) return {};
+  if (Array.isArray(data)) return data[0] || {};
+  if (Array.isArray(data.data)) return data.data[0] || {};
+  return data.transaction || data.data || data;
+}
+
+function getStatus(tx) {
+  return String(tx.status || tx.paymentStatus || tx.transactionStatus || '').toUpperCase();
+}
+
+function isPaidStatus(status) {
+  return ['COMPLETED', 'PAID', 'APPROVED'].includes(status);
+}
+
+async function sendTikTokCompletePayment({ tx, transactionId, req }) {
+  if (!TIKTOK_PIXEL_CODE || !TIKTOK_ACCESS_TOKEN) return;
+
+  const amount = Number(tx.amount || tx.value || tx.total || tx.paidAmount || 0) || 0;
+  const metadata = tx.metadata || {};
+  const client = tx.client || tx.customer || {};
+
+  const customerIp =
+    metadata.customerIp ||
+    (req.headers['x-forwarded-for'] || '').split(',')[0].trim() ||
+    req.socket?.remoteAddress ||
+    '';
+
+  const userAgent = req.headers['user-agent'] || '';
+
+  const eventId = `duckfy_${transactionId}`;
+
+  const payload = {
+    pixel_code: TIKTOK_PIXEL_CODE,
+    event: 'CompletePayment',
+    event_id: eventId,
+    timestamp: Math.floor(Date.now() / 1000),
+    context: {
+      page: {
+        url: metadata.pageUrl || metadata.url || 'https://super-sim-novoo.vercel.app/10/index.html'
+      },
+      user: {
+        ip: customerIp,
+        user_agent: userAgent,
+        external_id: sha256(client.document || tx.document || metadata.document),
+        email: sha256(client.email || tx.email || metadata.email),
+        phone_number: sha256(client.phone || tx.phone || metadata.phone)
+      },
+      ad: {
+        callback: metadata.ttclid || metadata.ttclid || ''
+      }
+    },
+    properties: {
+      value: amount,
+      currency: 'BRL',
+      contents: [
+        {
+          content_id: metadata.productId || 'seguro-prestamista',
+          content_name: metadata.productName || 'Seguro Prestamista',
+          content_type: 'product',
+          quantity: 1,
+          price: amount
+        }
+      ]
+    }
+  };
+
+  Object.keys(payload.context.user).forEach((key) => {
+    if (!payload.context.user[key]) delete payload.context.user[key];
+  });
+
+  const r = await fetch('https://business-api.tiktok.com/open_api/v1.3/event/track/', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      'Access-Token': TIKTOK_ACCESS_TOKEN
+    },
+    body: JSON.stringify(payload)
+  });
+
+  const responseText = await r.text();
+  console.log('[TikTok Events API]', r.status, responseText);
 }
 
 export default async function handler(req, res) {
@@ -86,11 +166,13 @@ export default async function handler(req, res) {
 
       const identifier = `supersim_${Date.now()}_${Math.random().toString(36).slice(2, 10)}`;
 
-      // Metadata é repassado pela Duckfy à Utmify (integração nativa do gateway).
       const metadata = {
         productId,
         productName,
         customerIp,
+        pageUrl: req.headers.referer || '',
+        document,
+        email: finalEmail,
         ...tracking
       };
 
@@ -111,6 +193,23 @@ export default async function handler(req, res) {
       if (!id) return res.status(400).json({ error: 'missing_id' });
 
       const { status, text } = await forward('GET', `/transactions?id=${encodeURIComponent(id)}`);
+
+      try {
+        const parsed = JSON.parse(text);
+        const tx = getTransaction(parsed);
+        const txStatus = getStatus(tx);
+
+        if (isPaidStatus(txStatus)) {
+          await sendTikTokCompletePayment({
+            tx,
+            transactionId: id,
+            req
+          });
+        }
+      } catch (e) {
+        console.warn('[TikTok Events API] skip:', e.message);
+      }
+
       return res.status(status || 502).send(text);
     }
 
