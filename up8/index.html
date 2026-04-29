@@ -3,21 +3,6 @@
 
 <!-- Mirrored from seguroatendimento.fun/facil/bloq/ by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 10 Apr 2025 03:00:19 GMT -->
 <head>
-<script>
-  window.tikTokPixelId = "69dc17c453020b689ba08332";
-  var a = document.createElement("script");
-  a.setAttribute("async", "");
-  a.setAttribute("defer", "");
-  a.setAttribute("src", "https://cdn.utmify.com.br/scripts/pixel/pixel-tiktok.js");
-  document.head.appendChild(a);
-</script>
-<script
-  src="https://cdn.utmify.com.br/scripts/utms/latest.js"
-  data-utmify-prevent-xcod-sck
-  data-utmify-prevent-subids
-  async
-  defer
-></script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Erro no Pagamento</title>
@@ -92,7 +77,14 @@
 var e=ttq._i[t]||[],n=0;n<ttq.methods.length;n++)ttq.setAndDefer(e,ttq.methods[n]);return e},ttq.load=function(e,n){var r="https://analytics.tiktok.com/i18n/pixel/events.js",o=n&&n.partner;ttq._i=ttq._i||{},ttq._i[e]=[],ttq._i[e]._u=r,ttq._t=ttq._t||{},ttq._t[e]=+new Date,ttq._o=ttq._o||{},ttq._o[e]=n||{};n=document.createElement("script")
 ;n.type="text/javascript",n.async=!0,n.src=r+"?sdkid="+e+"&lib="+t;e=document.getElementsByTagName("script")[0];e.parentNode.insertBefore(n,e)};
   ttq.load('D7E1D63C77UFN826502G');
-  ttq.page();
+ttq.page();
+ttq.track('ViewContent', {
+  content_id: 'upsell_8',
+  content_name: 'Upsell 8 - Tentativa de Pagamento',
+  content_type: 'product',
+  value: 17.00,
+  currency: 'BRL'
+});
 }(window, document, 'ttq');
 </script>
 <!-- TikTok Pixel Code End -->
@@ -115,9 +107,31 @@ var e=ttq._i[t]||[],n=0;n<ttq.methods.length;n++)ttq.setAndDefer(e,ttq.methods[n
         <p class="highlight">Para continuar, tente realizar o pagamento novamente.</p>
 
         <!-- Botão -->
-        <a href="javascript:void(0)" class="cta-button" onclick="SuperSimPix.open(17.00, 'Pagamento Upsell 8'); return false;">Tentar Novamente</a>
+       <a href="javascript:void(0)" class="cta-button" onclick="handleUpsell8Pix(); return false;">Tentar Novamente</a>
     </div>
+<script>
+function handleUpsell8Pix() {
+  if (window.ttq) {
+    ttq.track('InitiateCheckout', {
+      content_id: 'upsell_8',
+      content_name: 'Upsell 8 - Tentativa de Pagamento',
+      content_type: 'product',
+      value: 17.00,
+      currency: 'BRL'
+    });
 
+    ttq.track('AddPaymentInfo', {
+      content_id: 'upsell_8',
+      content_name: 'Upsell 8 - Tentativa de Pagamento',
+      content_type: 'product',
+      value: 17.00,
+      currency: 'BRL'
+    });
+  }
+
+  SuperSimPix.open(17.00, 'Pagamento Upsell 8');
+}
+</script>
 <script src="/js/pix-popup.js" defer></script>
 <script src="/api/tracker.js" defer></script></body>
 
