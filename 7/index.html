@@ -678,6 +678,31 @@ body, main, #allrecords, #content, .t-body, .t-records { opacity:1!important; vi
 
 <script src="js/utm-handler.js" data-token="3269fe28-2341-4107-9bf9-f1ad9d68455f">
 </script>
+  <script src="js/utm-handler.js" data-token="3269fe28-2341-4107-9bf9-f1ad9d68455f"></script>
+
+<!-- TikTok Pixel -->
+<script>
+!function (w, d, t) {
+  w.TiktokAnalyticsObject=t;
+  var ttq=w[t]=w[t]||[];
+  ttq.methods=["page","track","identify","instances","debug","on","off","once","ready","alias","group","enableCookie","disableCookie"];
+  ttq.setAndDefer=function(t,e){t[e]=function(){t.push([e].concat(Array.prototype.slice.call(arguments,0)))}}; 
+  for(var i=0;i<ttq.methods.length;i++)ttq.setAndDefer(ttq,ttq.methods[i]);
+
+  ttq.load=function(e){
+    var s=d.createElement("script");
+    s.async=!0;
+    s.src="https://analytics.tiktok.com/i18n/pixel/events.js?sdkid="+e+"&lib="+t;
+    var x=d.getElementsByTagName("script")[0];
+    x.parentNode.insertBefore(s,x);
+  };
+
+  ttq.load('D7E1D63C77UFN826502G');
+  ttq.page();
+  ttq.track('ViewContent');
+}(window, document, 'ttq');
+</script>
+<!-- End Pixel -->
 </head>
 <body>
 <header class="header">
@@ -1071,14 +1096,6 @@ else document.addEventListener('DOMContentLoaded',function(){obs.observe(documen
     }
   } catch(e) {}
   })();
-</script>
-<script>
-  window.tikTokPixelId = "69df0305ed4d941e929f9c57";
-  var a = document.createElement("script");
-  a.setAttribute("async", "");
-  a.setAttribute("defer", "");
-  a.setAttribute("src", "https://cdn.utmify.com.br/scripts/pixel/pixel-tiktok.js");
-  document.head.appendChild(a);
 </script>
 <script>
   (function(){
