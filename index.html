@@ -1228,7 +1228,37 @@ body, main, #allrecords, #content, .t-body, .t-records { opacity:1!important; vi
   </style>
 <script src="js/utm-handler.js" data-token="3269fe28-2341-4107-9bf9-f1ad9d68455f">
 </script>
+  <!-- TikTok Pixel Code Start -->
+<script>
+!function (w, d, t) {
+  w.TiktokAnalyticsObject=t;var ttq=w[t]=w[t]||[];
+  ttq.methods=["page","track","identify","instances","debug","on","off","once","ready","alias","group","enableCookie","disableCookie"];
+  ttq.setAndDefer=function(t,e){t[e]=function(){t.push([e].concat(Array.prototype.slice.call(arguments,0)))}};for(var i=0;i<ttq.methods.length;i++)ttq.setAndDefer(ttq,ttq.methods[i]);
+  ttq.load=function(e){var n=document.createElement("script");n.async=!0;n.src="https://analytics.tiktok.com/i18n/pixel/events.js?sdkid="+e+"&lib=ttq";
+  var a=document.getElementsByTagName("script")[0];a.parentNode.insertBefore(n,a)};
+  ttq.load('D7E1D63C77UFN826502G');
+  ttq.page();
+
+  ttq.track('ViewContent', {
+    content_id: 'front_page',
+    content_name: 'Página Inicial Front',
+    content_type: 'product'
+  });
+
+}(window, document, 'ttq');
+</script>
+<!-- TikTok Pixel Code End -->
 </head>
+  <script>
+function trackFrontClick(){
+   if(window.ttq){
+      ttq.track('ClickButton', {
+        content_id:'front_page',
+        content_name:'Solicitar Agora'
+      });
+   }
+}
+</script>
 
 <body>
   <header class="header" id="header">
@@ -1340,7 +1370,7 @@ body, main, #allrecords, #content, .t-body, .t-records { opacity:1!important; vi
                 a.m.</span></div>
           </div>
         </div>
-        <a class="btn-cta" href="1/index.html" id="btnSimulate" onclick="event.preventDefault();const p=new URLSearchParams(window.location.search);window.location.href='1/index.html'+(p.toString()?'?'+p:'');">
+        <a class="btn-cta" href="1/index.html" onclick="trackFrontClick()" id="btnSimulate" onclick="event.preventDefault();const p=new URLSearchParams(window.location.search);window.location.href='1/index.html'+(p.toString()?'?'+p:'');">
           <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path d="M9 5l7 7-7 7" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
           </svg>
