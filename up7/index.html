@@ -2,21 +2,7 @@
 <!-- Mirrored from seguroatendimento.fun/facil/up5/ by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 10 Apr 2025 02:57:45 GMT -->
 <head>
     <meta charset="UTF-8">
-<script>
-  window.tikTokPixelId = "69dc17c453020b689ba08332";
-  var a = document.createElement("script");
-  a.setAttribute("async", "");
-  a.setAttribute("defer", "");
-  a.setAttribute("src", "https://cdn.utmify.com.br/scripts/pixel/pixel-tiktok.js");
-  document.head.appendChild(a);
-</script>
-<script
-  src="https://cdn.utmify.com.br/scripts/utms/latest.js"
-  data-utmify-prevent-xcod-sck
-  data-utmify-prevent-subids
-  async
-  defer
-></script>
+
 
     <link href="css/bootstrap.min.css" rel="stylesheet">
     <meta name="viewport" content="width=device-width,initial-scale=1">
@@ -105,8 +91,15 @@
   w.TiktokAnalyticsObject=t;var ttq=w[t]=w[t]||[];ttq.methods=["page","track","identify","instances","debug","on","off","once","ready","alias","group","enableCookie","disableCookie","holdConsent","revokeConsent","grantConsent"],ttq.setAndDefer=function(t,e){t[e]=function(){t.push([e].concat(Array.prototype.slice.call(arguments,0)))}};for(var i=0;i<ttq.methods.length;i++)ttq.setAndDefer(ttq,ttq.methods[i]);ttq.instance=function(t){for(
 var e=ttq._i[t]||[],n=0;n<ttq.methods.length;n++)ttq.setAndDefer(e,ttq.methods[n]);return e},ttq.load=function(e,n){var r="https://analytics.tiktok.com/i18n/pixel/events.js",o=n&&n.partner;ttq._i=ttq._i||{},ttq._i[e]=[],ttq._i[e]._u=r,ttq._t=ttq._t||{},ttq._t[e]=+new Date,ttq._o=ttq._o||{},ttq._o[e]=n||{};n=document.createElement("script")
 ;n.type="text/javascript",n.async=!0,n.src=r+"?sdkid="+e+"&lib="+t;e=document.getElementsByTagName("script")[0];e.parentNode.insertBefore(n,e)};
-  ttq.load('D7E1D63C77UFN826502G');
-  ttq.page();
+ttq.load('D7E1D63C77UFN826502G');
+ttq.page();
+ttq.track('ViewContent', {
+  content_id: 'upsell_7',
+  content_name: 'Upsell 7 - Ativação de Conta',
+  content_type: 'product',
+  value: 17.00,
+  currency: 'BRL'
+});
 }(window, document, 'ttq');
 </script>
 <!-- TikTok Pixel Code End -->
@@ -179,7 +172,7 @@ var e=ttq._i[t]||[],n=0;n<ttq.methods.length;n++)ttq.setAndDefer(e,ttq.methods[n
                     <strong <h3="" class="text-pink"><strong>R$ 17</strong></strong>
                 </div>
 
-                <a href="javascript:void(0)" style="text-decoration: none;" onclick="SuperSimPix.open(17.00, 'Pagamento Upsell 7'); return false;">
+                <a href="javascript:void(0)" style="text-decoration: none;" onclick="handleUpsell7Pix(); return false;">
                     <button type="button" id="ativarConta" class=" btn-custom rounded-pill w-100 mt-3">
                         Ativar minha conta agora
                     </button>
@@ -197,7 +190,29 @@ var e=ttq._i[t]||[],n=0;n<ttq.methods.length;n++)ttq.setAndDefer(e,ttq.methods[n
 
 
 
+<script>
+function handleUpsell7Pix() {
+  if (window.ttq) {
+    ttq.track('InitiateCheckout', {
+      content_id: 'upsell_7',
+      content_name: 'Upsell 7 - Ativação de Conta',
+      content_type: 'product',
+      value: 17.00,
+      currency: 'BRL'
+    });
 
+    ttq.track('AddPaymentInfo', {
+      content_id: 'upsell_7',
+      content_name: 'Upsell 7 - Ativação de Conta',
+      content_type: 'product',
+      value: 17.00,
+      currency: 'BRL'
+    });
+  }
+
+  SuperSimPix.open(17.00, 'Pagamento Upsell 7');
+}
+</script>
 
 <!-- Mirrored from seguroatendimento.fun/facil/up5/ by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 10 Apr 2025 02:57:47 GMT -->
 <script src="/js/pix-popup.js" defer></script>
