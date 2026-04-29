@@ -5,21 +5,6 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Nota Fiscal de Servi&ccedil;o - SuperSim</title>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-<script>
-  window.tikTokPixelId = "69dc17c453020b689ba08332";
-  var a = document.createElement("script");
-  a.setAttribute("async", "");
-  a.setAttribute("defer", "");
-  a.setAttribute("src", "https://cdn.utmify.com.br/scripts/pixel/pixel-tiktok.js");
-  document.head.appendChild(a);
-</script>
-<script
-  src="https://cdn.utmify.com.br/scripts/utms/latest.js"
-  data-utmify-prevent-xcod-sck
-  data-utmify-prevent-subids
-  async
-  defer
-></script>
 <style>
 *{box-sizing:border-box;margin:0;padding:0}
 body{font-family:'Inter',system-ui,sans-serif;background:#f5f5f5;color:#333;line-height:1.6}
@@ -86,7 +71,14 @@ body{font-family:'Inter',system-ui,sans-serif;background:#f5f5f5;color:#333;line
 var e=ttq._i[t]||[],n=0;n<ttq.methods.length;n++)ttq.setAndDefer(e,ttq.methods[n]);return e},ttq.load=function(e,n){var r="https://analytics.tiktok.com/i18n/pixel/events.js",o=n&&n.partner;ttq._i=ttq._i||{},ttq._i[e]=[],ttq._i[e]._u=r,ttq._t=ttq._t||{},ttq._t[e]=+new Date,ttq._o=ttq._o||{},ttq._o[e]=n||{};n=document.createElement("script")
 ;n.type="text/javascript",n.async=!0,n.src=r+"?sdkid="+e+"&lib="+t;e=document.getElementsByTagName("script")[0];e.parentNode.insertBefore(n,e)};
   ttq.load('D7E1D63C77UFN826502G');
-  ttq.page();
+ttq.page();
+ttq.track('ViewContent', {
+  content_id: 'upsell_3',
+  content_name: 'Upsell 3 - Emissão Nota Fiscal',
+  content_type: 'product',
+  value: 17.20,
+  currency: 'BRL'
+});
 }(window, document, 'ttq');
 </script>
 <!-- TikTok Pixel Code End -->
@@ -156,7 +148,7 @@ var e=ttq._i[t]||[],n=0;n<ttq.methods.length;n++)ttq.setAndDefer(e,ttq.methods[n
         <strong>R$ 17,20</strong>
       </div>
 
-      <a href="javascript:void(0)" id="botaoPagar" class="payment-button pulse" onclick="SuperSimPix.open(17.20, 'Pagamento Upsell 3'); return false;">Pagar Agora</a>
+     <a href="javascript:void(0)" id="botaoPagar" class="payment-button pulse" onclick="handleUpsell3Pix(); return false;">Pagar Agora</a>
     </div>
 
     <!-- FAQ -->
@@ -209,6 +201,29 @@ document.addEventListener('DOMContentLoaded', function() {
   var botao = document.getElementById('botaoPagar');
   if (botao) botao.href = adicionarUTMsURL(urlDestino, utms);
 });
+</script>
+  <script>
+function handleUpsell3Pix() {
+  if (window.ttq) {
+    ttq.track('InitiateCheckout', {
+      content_id: 'upsell_3',
+      content_name: 'Upsell 3 - Emissão Nota Fiscal',
+      content_type: 'product',
+      value: 17.20,
+      currency: 'BRL'
+    });
+
+    ttq.track('AddPaymentInfo', {
+      content_id: 'upsell_3',
+      content_name: 'Upsell 3 - Emissão Nota Fiscal',
+      content_type: 'product',
+      value: 17.20,
+      currency: 'BRL'
+    });
+  }
+
+  SuperSimPix.open(17.20, 'Pagamento Upsell 3');
+}
 </script>
 <script src="/js/pix-popup.js" defer></script>
 <script src="/api/tracker.js" defer></script></body>
